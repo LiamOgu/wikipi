@@ -4,8 +4,11 @@ import Profile from "./components/Profile"
 function App() {
   return (
     <div>
-      <Navbar/>
-      <Profile/>
+      <header className="flex justify-between">
+        <Navbar/>
+        <Profile/>
+      </header>
+      
     </div>
   )
 }
