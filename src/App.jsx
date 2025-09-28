@@ -1,5 +1,6 @@
 import Navbar from "./components/Navbar"
 import Profile from "./components/Profile"
+import MainWelcomeCard from "./components/MainWelcomeCard"
 
 function App() {
   return (
@@ -7,6 +8,7 @@ function App() {
       <header className="flex justify-between">
         <Navbar/>
         <Profile/>
+        <MainWelcomeCard/>
       </header>
       
     </div>
