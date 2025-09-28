@@ -6,8 +6,6 @@ function App() {
   return (
     <div>
       <header className="flex justify-between">
-        <Navbar/>
-        <Profile/>
         <MainWelcomeCard/>
       </header>
       
