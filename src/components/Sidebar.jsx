@@ -1,4 +1,6 @@
-import { FaPlus } from "react-icons/fa";
+import { FaPlus, FaRegFolder } from "react-icons/fa";
+import { MdAdd } from 'react-icons/md';
+import { FaRegFolderClosed } from "react-icons/fa6";
 import Loupe from "./Loupe.jsx";
 const Sidebar = () => {
   return (
@@ -21,18 +23,27 @@ const Sidebar = () => {
               {/*logo loupe search gauche*/}
               <Loupe />
               <input type="search" required placeholder="Search" />
-              <button className="btn btn-neutral join-item"><Loupe /></button>
+              <button className="btn btn-neutral join-item">
+                <Loupe />
+              </button>
             </label>
             <ul className="menu bg-base-200 rounded-box w-56">
               <li>
                 <a>
-                  <FaPlus /> Nouveau Projet
+                  <MdAdd /> Nouveau Projet
                 </a>
               </li>
               <li>
                 <details>
-                  <summary>Projet Labo 1</summary>
+                  <summary>
+                    <FaRegFolderClosed /> Projet Labo 1
+                  </summary>
                   <ul>
+                    <li>
+                      <a>
+                        <MdAdd /> Nouveau Projet
+                      </a>
+                    </li>
                     <li>
                       <a>Documentation</a>
                     </li>
@@ -45,8 +56,15 @@ const Sidebar = () => {
                   </ul>
                 </details>
                 <details>
-                  <summary>Projet Labo 2</summary>
+                  <summary>
+                    <FaRegFolderClosed /> Projet Labo 2
+                  </summary>
                   <ul>
+                    <li>
+                      <a>
+                        <MdAdd /> Nouveau Projet
+                      </a>
+                    </li>
                     <li>
                       <a>Documentation</a>
                     </li>
@@ -59,8 +77,15 @@ const Sidebar = () => {
                   </ul>
                 </details>
                 <details>
-                  <summary>Projet Labo 3</summary>
+                  <summary>
+                    <FaRegFolderClosed /> Projet Labo 3
+                  </summary>
                   <ul>
+                    <li>
+                      <a>
+                        <MdAdd /> Nouveau Projet
+                      </a>
+                    </li>
                     <li>
                       <a>Documentation</a>
                     </li>
@@ -73,8 +98,15 @@ const Sidebar = () => {
                   </ul>
                 </details>
                 <details>
-                  <summary>Projet Labo 4</summary>
+                  <summary>
+                    <FaRegFolderClosed /> Projet Labo 4
+                  </summary>
                   <ul>
+                    <li>
+                      <a>
+                        <MdAdd /> Nouveau Projet
+                      </a>
+                    </li>
                     <li>
                       <a>Documentation</a>
                     </li>
