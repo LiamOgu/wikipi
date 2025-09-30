@@ -5,13 +5,8 @@ import Loupe from "./Loupe.jsx";
 const Sidebar = () => {
   return (
     <>
-      <div className="drawer z-40">
+      <div className="drawer z-40 lg:drawer-open">
         <input id="my-drawer" type="checkbox" className="drawer-toggle" />
-        <div className="drawer-content flex items-center justify-center min-h-screen">
-          <label htmlFor="my-drawer" className="btn btn-primary drawer-button">
-            Open Sidebar
-          </label>
-        </div>
         <div className="drawer-side mt-20">
           <label
             htmlFor="my-drawer"
