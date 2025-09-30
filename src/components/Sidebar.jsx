@@ -4,7 +4,7 @@ import { FaRegFolderClosed } from "react-icons/fa6";
 import Loupe from "./Loupe.jsx";
 const Sidebar = () => {
   return (
-    <>
+    <div>
       <div className="drawer z-40 lg:drawer-open">
         <input id="my-drawer" type="checkbox" className="drawer-toggle" />
         <div className="drawer-side mt-20">
@@ -118,7 +118,7 @@ const Sidebar = () => {
           </ul>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
