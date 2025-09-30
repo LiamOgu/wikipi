@@ -1,3 +1,5 @@
+import { FaPlus } from "react-icons/fa";
+import Loupe from "./Loupe.jsx";
 const Sidebar = () => {
   return (
     <>
@@ -16,56 +18,76 @@ const Sidebar = () => {
           ></label>
           <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4">
             <label className="input">
-              <svg
-                className="h-[1em] opacity-50"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-              >
-                <g
-                  strokeLinejoin="round"
-                  trokeLinecap="round"
-                  strokeWidth="2.5"
-                  fill="none"
-                  stroke="currentColor"
-                >
-                  <circle cx="11" cy="11" r="8"></circle>
-                  <path d="m21 21-4.3-4.3"></path>
-                </g>
-              </svg>
+              {/*logo loupe search gauche*/}
+              <Loupe />
               <input type="search" required placeholder="Search" />
+              <button className="btn btn-neutral join-item"><Loupe /></button>
             </label>
-            <div
-              tabIndex={0}
-              className="collapse collapse-arrow bg-base-100 border-base-300 border"
-            >
-              <div className="collapse-title font-semibold">
-                Projet Labo 1
-              </div>
-              <div className="collapse-content text-sm">
-                <button className="btn btn-wide">Wide</button>
-              </div>
-            </div>
-            <div
-              tabIndex={0}
-              className="collapse collapse-arrow bg-base-100 border-base-300 border"
-            >
-              <div className="collapse-title font-semibold">
-                Projet Labo 1
-              </div>
-              <div className="collapse-content text-sm">
-                <button className="btn btn-wide">Wide</button>
-              </div>
-            </div>
-<div
-              tabIndex={0}
-              className="collapse collapse-arrow bg-base-100 border-base-300 border">
-              <div className="collapse-title font-semibold">
-                Projet Labo 1
-              </div>
-              <div className="collapse-content text-sm">
-                <button className="btn btn-wide">Wide</button>
-              </div>
-            </div>
+            <ul className="menu bg-base-200 rounded-box w-56">
+              <li>
+                <a>
+                  <FaPlus /> Nouveau Projet
+                </a>
+              </li>
+              <li>
+                <details open>
+                  <summary>Projet Labo 1</summary>
+                  <ul>
+                    <li>
+                      <a>Documentation 1</a>
+                    </li>
+                    <li>
+                      <a>Documentation</a>
+                    </li>
+                    <li>
+                      <a>Documentation</a>
+                    </li>
+                  </ul>
+                </details>
+                <details open>
+                  <summary>Projet Labo 2</summary>
+                  <ul>
+                    <li>
+                      <a>Documentation</a>
+                    </li>
+                    <li>
+                      <a>Documentation</a>
+                    </li>
+                    <li>
+                      <a>Documentation</a>
+                    </li>
+                  </ul>
+                </details>
+                <details open>
+                  <summary>Projet Labo 3</summary>
+                  <ul>
+                    <li>
+                      <a>Documentation 1</a>
+                    </li>
+                    <li>
+                      <a>Documentation</a>
+                    </li>
+                    <li>
+                      <a>Documentation</a>
+                    </li>
+                  </ul>
+                </details>
+                <details open>
+                  <summary>Projet Labo 4</summary>
+                  <ul>
+                    <li>
+                      <a>Documentation 1</a>
+                    </li>
+                    <li>
+                      <a>Documentation</a>
+                    </li>
+                    <li>
+                      <a>Documentation</a>
+                    </li>
+                  </ul>
+                </details>
+              </li>
+            </ul>
           </ul>
         </div>
       </div>

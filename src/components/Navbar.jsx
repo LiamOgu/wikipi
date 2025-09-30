@@ -1,6 +1,7 @@
 import logoWikipi from '../assets/Logo_wikiPi.png'
 import user from '../assets/default-user-icon.webp'
 
+
 const Navbar = () => {
   return (
     <div className="navbar fixed top-0 left-0 w-full z-50 bg-base-100 px-6 py-4 flex justify-between border-b-1 border-gray-200">
