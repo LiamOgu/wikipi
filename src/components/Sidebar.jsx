@@ -30,11 +30,11 @@ const Sidebar = () => {
                 </a>
               </li>
               <li>
-                <details open>
+                <details>
                   <summary>Projet Labo 1</summary>
                   <ul>
                     <li>
-                      <a>Documentation 1</a>
+                      <a>Documentation</a>
                     </li>
                     <li>
                       <a>Documentation</a>
@@ -44,7 +44,7 @@ const Sidebar = () => {
                     </li>
                   </ul>
                 </details>
-                <details open>
+                <details>
                   <summary>Projet Labo 2</summary>
                   <ul>
                     <li>
@@ -58,11 +58,11 @@ const Sidebar = () => {
                     </li>
                   </ul>
                 </details>
-                <details open>
+                <details>
                   <summary>Projet Labo 3</summary>
                   <ul>
                     <li>
-                      <a>Documentation 1</a>
+                      <a>Documentation</a>
                     </li>
                     <li>
                       <a>Documentation</a>
@@ -72,11 +72,11 @@ const Sidebar = () => {
                     </li>
                   </ul>
                 </details>
-                <details open>
+                <details>
                   <summary>Projet Labo 4</summary>
                   <ul>
                     <li>
-                      <a>Documentation 1</a>
+                      <a>Documentation</a>
                     </li>
                     <li>
                       <a>Documentation</a>
