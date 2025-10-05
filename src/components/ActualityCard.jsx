@@ -2,7 +2,7 @@ import user from '../assets/default-user-icon.webp'
 
 const ActualityCard = () => {
     return (
-        <div className="card w-96 bg-white card-sm shadow-sm">
+        <div className="card w-80 bg-white card-sm shadow-sm">
             <div className="card-body text-black">
                 <h3>projet wikipi</h3>
                 <h2 className="card-title">Nom du projet</h2>
