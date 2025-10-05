@@ -2,6 +2,7 @@ import { FaPlus, FaRegFolder } from "react-icons/fa";
 import { MdAdd } from 'react-icons/md';
 import { FaRegFolderClosed } from "react-icons/fa6";
 import Loupe from "./Loupe.jsx";
+
 const Sidebar = () => {
   return (
     <div>
