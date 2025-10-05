@@ -1,13 +1,13 @@
 import Navbar from "./components/Navbar"
+import ActualityCard from "./components/ActualityCard.jsx"
 
 function App() {
   return (
-    <div>
-      <header className="flex justify-between">
-        <Navbar/>
-      </header>
+    <>
       
-    </div>
+      <ActualityCard/>
+      
+    </>
   )
 }
 
