@@ -1,11 +1,10 @@
-import Navbar from "./components/Navbar"
-import ActualityCard from "./components/ActualityCard.jsx"
+import RegisterForm from "./components/Register.jsx"
 
 function App() {
   return (
     <>
       
-      <ActualityCard/>
+      <RegisterForm/>
       
     </>
   )
