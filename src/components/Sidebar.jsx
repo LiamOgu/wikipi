@@ -3,11 +3,14 @@ import { MdAdd } from 'react-icons/md';
 import { FaRegFolderClosed } from "react-icons/fa6";
 import Loupe from "./Loupe.jsx";
 
-const Sidebar = () => {
+const Sidebar = ({ children }) => {
   return (
     <div>
       <div className="drawer z-40 lg:drawer-open">
         <input id="my-drawer" type="checkbox" className="drawer-toggle" />
+        <div className="drawer-content">
+          {children}
+        </div>
         <div className="drawer-side mt-20">
           <label
             htmlFor="my-drawer"

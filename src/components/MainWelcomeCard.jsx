@@ -1,6 +1,6 @@
 const MainWelcomeCard = () => {
     return (
-        <div className="w-full flex justify-center">
+        <div className="w-full flex justify-center mt-30">
             <div className="hero bg-[#C81E1E] rounded-md w-9/10 h-[230px]">
                 <div className="hero-content flex-col justify-between lg:flex-row w-10/10">
                     <div>

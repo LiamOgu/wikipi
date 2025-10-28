@@ -4,17 +4,14 @@ import MainWelcomeCard from "../components/MainWelcomeCard"
 
 const Home = () => {
   return (
-    <div>
-      <header className="flex justify-between">
+    <Sidebar>
+      <header >
         <Navbar />
       </header>
-      <Sidebar />
       <main>
         <MainWelcomeCard />
       </main>
-
-
-    </div>
+    </Sidebar >
   )
 }
 
