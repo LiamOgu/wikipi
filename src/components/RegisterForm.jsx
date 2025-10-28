@@ -1,6 +1,7 @@
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { FaRegEyeSlash } from "react-icons/fa";
 import logo from "../assets/Logo_wikiPi.png"
+import { NavLink } from "react-router-dom";
 
 
 
@@ -10,7 +11,7 @@ const RegisterForm = () => {
     const password = e.target.password.value;
     const confirmPassword = e.target.confirmPassword.value;
     if (password !== confirmPassword) {
-      alert("Les mots de passe ne correspondent pas ⚠️");
+      alert("Les mots de passe ne correspondent pas");
       return;
     }
   };
@@ -38,7 +39,7 @@ const RegisterForm = () => {
           <div>
             <label className="label text-[16px] font-medium text-gray-800">Mot de passe</label>
             <label className="input validator">
-              <input type="password" required placeholder="Mot de passe" minlength="8" name="password"/>
+              <input type="password" required placeholder="Mot de passe" minlength="8" name="password" />
               <button type="button" className="hidden hover:scale-110 transition duration-150">
                 <MdOutlineRemoveRedEye />
               </button>
@@ -51,7 +52,7 @@ const RegisterForm = () => {
           <div>
             <label className="label text-[16px] font-medium text-gray-800">Confirmation du mot de passe</label>
             <label className="input validator">
-              <input type="password" required placeholder="Confirmation du mot de passe" minlength="8" name="confirmPassword"/>
+              <input type="password" required placeholder="Confirmation du mot de passe" minlength="8" name="confirmPassword" />
               <button type="button" className="hidden hover:scale-110 transition duration-150">
                 <MdOutlineRemoveRedEye />
               </button>
@@ -65,7 +66,7 @@ const RegisterForm = () => {
             <button type="submit" className="btn bg-red-600 text-white px-6 py-3 font-normal text-[16px] rounded-md w-full">Inscription</button>
             <div className="flex gap-1">
               <p className="label text-gray-500 text-xs">Déja un compte ?</p>
-              <p className="label text-xs text-blue-500">Connectez-vous</p>
+              <NavLink to="/Login" className="label text-xs text-blue-500">Connectez-vous</NavLink>
             </div>
           </div>
         </fieldset>
