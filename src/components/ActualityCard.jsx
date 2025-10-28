@@ -4,7 +4,7 @@ import data from '../data/documentationData.js'
 const ActualityCard = ({ id }) => {
     const documentation = data.documentation.find(doc => doc.id === id)
     return (
-        <div className="card w-full bg-white card-sm shadow-sm">
+        <div className="card w-full bg-white card-sm shadow-sm hover:shadow-lg hover:scale-105 transition-all duration-200 hover:cursor-pointer">
             <div className="card-body text-black">
                 <h3>projet wikipi</h3>
                 <h2 className="card-title">{documentation.title}</h2>
