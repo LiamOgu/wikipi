@@ -1,2 +1,16 @@
 @import "tailwindcss";
 @plugin "daisyui";
+
+@theme{
+  extend: {
+    colors: {
+      red-primary: '#DC2626',
+      red-secondary: '#B91C1C',
+      red-terciary: '#991B1B',
+      text-primary: '#1F2937',
+      text-secondary: '#6B7280',
+      text-terciary: '#9CA4AF',
+      text-link: '#3B82F6',
+    },
+  },
+}
