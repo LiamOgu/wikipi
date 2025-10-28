@@ -63,10 +63,10 @@ const RegisterForm = () => {
             <p className="validator-hint hidden">Le mot de passe ne correspond pas.</p>
           </div>
           <div className="flex flex-col gap-2 items-center">
-            <button type="submit" className="btn bg-red-600 text-white px-6 py-3 font-normal text-[16px] rounded-md w-full">Inscription</button>
+            <button type="submit" className="btn bg-red-primary text-white px-6 py-3 font-normal text-[16px] rounded-md w-full">Inscription</button>
             <div className="flex gap-1">
               <p className="label text-gray-500 text-xs">Déja un compte ?</p>
-              <NavLink to="/Login" className="label text-xs text-blue-500">Connectez-vous</NavLink>
+              <NavLink to="/Login" className="label text-xs text-text-link">Connectez-vous</NavLink>
             </div>
           </div>
         </fieldset>

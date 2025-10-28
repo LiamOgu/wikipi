@@ -22,7 +22,7 @@ const Sidebar = ({ children }) => {
               {/*logo loupe search gauche*/}
               <Loupe strokeColor="black" />
               <input className="" type="search" required placeholder="Search" />
-              <button className="btn btn-square join-item bg-red-500 hover:bg-red-700 ">
+              <button className="btn btn-square join-item bg-red-primary hover:bg-red-secondary ">
                 <Loupe strokeColor="white" />
               </button>
             </label>

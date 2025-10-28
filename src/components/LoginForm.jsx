@@ -32,15 +32,15 @@ const LoginForm = () => {
             </label>
             <div className="flex justify-between">
               <p className="label text-gray-500 text-[14px]">Mot de passe</p>
-              <p className="label text-xs text-blue-500">Mot de passe oublié ?</p>
+              <p className="label text-xs text-text-link">Mot de passe oublié ?</p>
             </div>
             <p className="validator-hint hidden">Votre mot de passe doit faire au moins 8 caractères</p>
           </div>
           <div className="flex flex-col gap-2 items-center">
-            <button type="submit" className="btn bg-red-600 text-white px-6 py-3 font-normal text-[16px] rounded-md w-full">Connexion</button>
+            <button type="submit" className="btn bg-red-primary text-white px-6 py-3 font-normal text-[16px] rounded-md w-full">Connexion</button>
             <div className="flex gap-1">
               <p className="label text-gray-500 text-xs">Pas encore de compte ? </p>
-              <NavLink to="/Register" className="label text-xs text-blue-500"> Inscrivez-vous</NavLink>
+              <NavLink to="/Register" className="label text-xs text-text-link"> Inscrivez-vous</NavLink>
             </div>
           </div>
         </fieldset>
