@@ -28,7 +28,7 @@ const Sidebar = ({ children }) => {
             </label>
             <ul className="menu bg-base-200 rounded-box w-56">
               <li>
-                <label onClick={() => setIsOpen(true)} htmlFor="doc-modal" className="">
+                <label htmlFor="doc-modal" className="">
                   <MdAdd /> Nouveau Projet
                 </label>
               </li>
@@ -40,7 +40,7 @@ const Sidebar = ({ children }) => {
                   <ul>
                     <li>
                       <a>
-                        <MdAdd /> Nouveau Projet
+                        <MdAdd /> Nouvelle Documentation
                       </a>
                     </li>
                     <li>
@@ -61,7 +61,7 @@ const Sidebar = ({ children }) => {
                   <ul>
                     <li>
                       <a>
-                        <MdAdd /> Nouveau Projet
+                        <MdAdd /> Nouvelle Documentation
                       </a>
                     </li>
                     <li>
@@ -82,7 +82,7 @@ const Sidebar = ({ children }) => {
                   <ul>
                     <li>
                       <a>
-                        <MdAdd /> Nouveau Projet
+                        <MdAdd /> Nouvelle Documentation
                       </a>
                     </li>
                     <li>
@@ -103,7 +103,7 @@ const Sidebar = ({ children }) => {
                   <ul>
                     <li>
                       <a>
-                        <MdAdd /> Nouveau Projet
+                        <MdAdd /> Nouvelle Documentation
                       </a>
                     </li>
                     <li>

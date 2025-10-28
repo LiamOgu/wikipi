@@ -8,7 +8,9 @@ const MainWelcomeCard = () => {
                         <h1 className="text-5xl font-bold text-white">WikIpi</h1>
                     </div>
                     <div className="flex md:flex-row flex-col gap-2">
-                        <button className="btn bg-white text-red-secondary hover:bg-black hover:text-white">Créer un nouveau projet</button>
+                        <label htmlFor="doc-modal" className="btn bg-white text-red-secondary hover:bg-black hover:text-white">
+                            Créer un nouveau projet
+                        </label>
                         <button className="btn bg-white text-red-secondary hover:bg-black hover:text-white">Devenir Modérateur</button>
                     </div>
                 </div>

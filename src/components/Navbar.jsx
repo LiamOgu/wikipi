@@ -1,5 +1,6 @@
 import logoWikipi from '../assets/Logo_wikiPi.png'
 import user from '../assets/default-user-icon.webp'
+import {NavLink} from "react-router-dom"
 
 
 const Navbar = () => {
@@ -22,7 +23,7 @@ const Navbar = () => {
             <li className="menu-title border-b-1 border-gray-200">User</li>
             <li><a>Menu</a></li>
             <li><a>Settings</a></li>
-            <li><a>Log out</a></li> 
+            <li><NavLink to="/login"><a>Log out</a></NavLink></li> 
           </ul>
         </div>
       </div>
