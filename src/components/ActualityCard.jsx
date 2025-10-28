@@ -1,18 +1,19 @@
 import user from '../assets/default-user-icon.webp'
+import data from '../data/documentationData.js'
 
-const ActualityCard = () => {
+const ActualityCard = ({ id }) => {
+    const documentation = data.documentation.find(doc => doc.id === id)
     return (
         <div className="card w-full bg-white card-sm shadow-sm">
             <div className="card-body text-black">
                 <h3>projet wikipi</h3>
-                <h2 className="card-title">Nom du projet</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque blandit, libero ut sagittis imperdiet,
-                    arcu sapien molestie diam, non gravida odio ante vitae lacus. Nunc sagittis mauris at sapien pretium ultricies.</p>
+                <h2 className="card-title">{documentation.title}</h2>
+                <p>{documentation.content}</p>
                 <div className='flex flex-row gap-4'>
                     <img src={user} className='rounded-full w-[50px]'></img>
                     <div>
-                        <p>Username</p>
-                        <p>06/03/2024</p>
+                        <p>{documentation.author}</p>
+                        <p>{documentation.date}</p>
                     </div>
                 </div>
             </div>
