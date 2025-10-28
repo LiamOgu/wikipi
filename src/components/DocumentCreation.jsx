@@ -5,7 +5,7 @@ const DocumentCreation = () => {
   return (
     <div>
       <input type="checkbox" id="doc-modal" className="modal-toggle" />
-      <div className="modal" role="dialog">
+      <div className="modal backdrop-blur-lg transition-all duration-100 ease-in-out" role="dialog">
         <div className="modal-box flex flex-col justify-center items-center bg-white rounded-2xl shadow-lg p-10 w-[420px]">
           <h2 className="text-2xl font-bold text-center mb-6">
             Créer une documentation

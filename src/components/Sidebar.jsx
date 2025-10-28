@@ -17,18 +17,19 @@ const Sidebar = ({ children }) => {
             aria-label="close sidebar"
             className="drawer-overlay"
           ></label>
-          <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4">
-            <label className="input flex">
-              {/*logo loupe search gauche*/}
-              <Loupe strokeColor="black" />
-              <input className="" type="search" required placeholder="Search" />
-              <button className="btn btn-square join-item bg-red-primary hover:bg-red-secondary ">
+          <ul className="menu bg-base-200 min-h-full w-80 p-4">
+            <label className="flex justify-between w-9/10 rounded-box border border-gray-300">
+              <div className="flex items-center gap-2 mx-2">
+                <Loupe strokeColor="black" />
+              </div>
+              <input className="appearance-none pl-2" type="" required placeholder="Search" />
+              <button className="btn btn-square join-item bg-red-primary hover:bg-red-secondary rounded-e-box">
                 <Loupe strokeColor="white" />
               </button>
             </label>
-            <ul className="menu bg-base-200 rounded-box w-56">
+            <ul className="menu bg-base-200 rounded-box w-9/10">
               <li>
-                <label htmlFor="doc-modal" className="">
+                <label htmlFor="projet-modal" className="btn flex justify-start w-full mb-4">
                   <MdAdd /> Nouveau Projet
                 </label>
               </li>
@@ -39,9 +40,9 @@ const Sidebar = ({ children }) => {
                   </summary>
                   <ul>
                     <li>
-                      <a>
+                      <label htmlFor="doc-modal" className="btn">
                         <MdAdd /> Nouvelle Documentation
-                      </a>
+                      </label>
                     </li>
                     <li>
                       <a>Documentation</a>
@@ -60,9 +61,9 @@ const Sidebar = ({ children }) => {
                   </summary>
                   <ul>
                     <li>
-                      <a>
+                      <label htmlFor="doc-modal" className="btn">
                         <MdAdd /> Nouvelle Documentation
-                      </a>
+                      </label>
                     </li>
                     <li>
                       <a>Documentation</a>
@@ -81,9 +82,9 @@ const Sidebar = ({ children }) => {
                   </summary>
                   <ul>
                     <li>
-                      <a>
+                      <label htmlFor="doc-modal" className="btn">
                         <MdAdd /> Nouvelle Documentation
-                      </a>
+                      </label>
                     </li>
                     <li>
                       <a>Documentation</a>
@@ -102,9 +103,9 @@ const Sidebar = ({ children }) => {
                   </summary>
                   <ul>
                     <li>
-                      <a>
+                      <label htmlFor="doc-modal" className="btn">
                         <MdAdd /> Nouvelle Documentation
-                      </a>
+                      </label>
                     </li>
                     <li>
                       <a>Documentation</a>
