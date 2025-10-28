@@ -2,6 +2,7 @@ import Navbar from "../components/Navbar"
 import Sidebar from "../components/Sidebar"
 import MainWelcomeCard from "../components/MainWelcomeCard"
 import ActualitySection from "../components/ActualitySection"
+import DocumentCreation from "../components/DocumentCreation"
 
 const Home = () => {
   return (
@@ -12,6 +13,7 @@ const Home = () => {
       <main>
         <MainWelcomeCard />
         <ActualitySection />
+        <DocumentCreation />
       </main>
     </Sidebar >
   )
