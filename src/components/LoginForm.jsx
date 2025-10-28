@@ -51,7 +51,7 @@ const LoginForm = () => {
       </div>
 
       <div className="flex items-center">
-        <img src={panda} className="w-90 lg:inline hidden"></img>
+        <img src={panda} className="w-90 lg:inline hidden" alt="image of a panda saying 'Hey welcome back'"></img>
       </div>
     </div>
   )
