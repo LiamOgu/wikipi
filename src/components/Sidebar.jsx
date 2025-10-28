@@ -28,9 +28,9 @@ const Sidebar = ({ children }) => {
             </label>
             <ul className="menu bg-base-200 rounded-box w-56">
               <li>
-                <a>
+                <label onClick={() => setIsOpen(true)} htmlFor="doc-modal" className="">
                   <MdAdd /> Nouveau Projet
-                </a>
+                </label>
               </li>
               <li>
                 <details>
