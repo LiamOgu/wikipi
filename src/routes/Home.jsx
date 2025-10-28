@@ -1,6 +1,7 @@
 import Navbar from "../components/Navbar"
 import Sidebar from "../components/Sidebar"
 import MainWelcomeCard from "../components/MainWelcomeCard"
+import ActualitySection from "../components/ActualitySection"
 
 const Home = () => {
   return (
@@ -10,6 +11,7 @@ const Home = () => {
       </header>
       <main>
         <MainWelcomeCard />
+        <ActualitySection />
       </main>
     </Sidebar >
   )
