@@ -17,10 +17,10 @@ const Sidebar = () => {
           <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4">
             <label className="input flex">
               {/*logo loupe search gauche*/}
-              <Loupe strokeColor="black"/>
+              <Loupe strokeColor="black" />
               <input className="" type="search" required placeholder="Search" />
               <button className="btn btn-square join-item bg-red-500 hover:bg-red-700 ">
-                <Loupe strokeColor="white"/>
+                <Loupe strokeColor="white" />
               </button>
             </label>
             <ul className="menu bg-base-200 rounded-box w-56">
