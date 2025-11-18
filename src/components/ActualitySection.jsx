@@ -1,5 +1,5 @@
 import ActualityCard from "./ActualityCard"
-import data from '../data/documentationData.js'
+import data from '../data/documentationsData.js'
 
 const ActualitySection = () => {
   const doc = Array.from({ length: data.documentation.length }, (_, i) => i + 1);

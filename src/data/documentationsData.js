@@ -5,7 +5,7 @@ const data = {
             title: "Introduction à WikiPi",
             content: "WikiPi est une plateforme collaborative...",
             author: "John Doe",
-            date: "2024-03-01"
+            date: "2024-03-01",
         },
         {
             id: 2,

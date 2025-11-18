@@ -1,5 +1,5 @@
 import user from '../assets/default-user-icon.webp'
-import data from '../data/documentationData.js'
+import data from '../data/documentationsData.js'
 
 const ActualityCard = ({ id }) => {
     const documentation = data.documentation.find(doc => doc.id === id)
