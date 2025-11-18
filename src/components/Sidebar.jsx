@@ -2,8 +2,11 @@ import { FaPlus, FaRegFolder } from "react-icons/fa";
 import { MdAdd } from 'react-icons/md';
 import { FaRegFolderClosed } from "react-icons/fa6";
 import Loupe from "./Loupe.jsx";
+import data from '../data/projetsData.js'
+import SidebarProjet from "./SidebarProjet.jsx";
 
 const Sidebar = ({ children }) => {
+  const projet = Array.from({ length: data.projet.length }, (_, i) => i);
   return (
     <div>
       <div className="drawer z-40 lg:drawer-open">
@@ -33,92 +36,9 @@ const Sidebar = ({ children }) => {
                   <MdAdd /> Nouveau Projet
                 </label>
               </li>
-              <li>
-                <details>
-                  <summary>
-                    <FaRegFolderClosed /> Projet Labo 1
-                  </summary>
-                  <ul>
-                    <li>
-                      <label htmlFor="doc-modal" className="btn">
-                        <MdAdd /> Nouvelle Documentation
-                      </label>
-                    </li>
-                    <li>
-                      <a>Documentation</a>
-                    </li>
-                    <li>
-                      <a>Documentation</a>
-                    </li>
-                    <li>
-                      <a>Documentation</a>
-                    </li>
-                  </ul>
-                </details>
-                <details>
-                  <summary>
-                    <FaRegFolderClosed /> Projet Labo 2
-                  </summary>
-                  <ul>
-                    <li>
-                      <label htmlFor="doc-modal" className="btn">
-                        <MdAdd /> Nouvelle Documentation
-                      </label>
-                    </li>
-                    <li>
-                      <a>Documentation</a>
-                    </li>
-                    <li>
-                      <a>Documentation</a>
-                    </li>
-                    <li>
-                      <a>Documentation</a>
-                    </li>
-                  </ul>
-                </details>
-                <details>
-                  <summary>
-                    <FaRegFolderClosed /> Projet Labo 3
-                  </summary>
-                  <ul>
-                    <li>
-                      <label htmlFor="doc-modal" className="btn">
-                        <MdAdd /> Nouvelle Documentation
-                      </label>
-                    </li>
-                    <li>
-                      <a>Documentation</a>
-                    </li>
-                    <li>
-                      <a>Documentation</a>
-                    </li>
-                    <li>
-                      <a>Documentation</a>
-                    </li>
-                  </ul>
-                </details>
-                <details>
-                  <summary>
-                    <FaRegFolderClosed /> Projet Labo 4
-                  </summary>
-                  <ul>
-                    <li>
-                      <label htmlFor="doc-modal" className="btn">
-                        <MdAdd /> Nouvelle Documentation
-                      </label>
-                    </li>
-                    <li>
-                      <a>Documentation</a>
-                    </li>
-                    <li>
-                      <a>Documentation</a>
-                    </li>
-                    <li>
-                      <a>Documentation</a>
-                    </li>
-                  </ul>
-                </details>
-              </li>
+              {projet.map(id => (
+                <SidebarProjet key={id} id={id} />
+              ))}
             </ul>
           </ul>
         </div>

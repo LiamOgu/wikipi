@@ -2,7 +2,7 @@ import ActualityCard from "./ActualityCard"
 import data from '../data/documentationsData.js'
 
 const ActualitySection = () => {
-  const doc = Array.from({ length: data.documentation.length }, (_, i) => i + 1);
+  const doc = Array.from({ length: data.documentation.length }, (_, i) => i);
   return (
     <div className="w-full flex flex-col items-center my-10">
       <div className="w-9/10 flex">

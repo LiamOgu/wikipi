@@ -18,6 +18,21 @@ const data = {
         }
       ]
     },
+    {
+      id : 2,
+      title : "Projet Labo 3",
+      documentations : [
+        {
+          id : 2
+        },
+        {
+          id : 3
+        },
+        {
+          id : 4
+        }
+      ]
+    }
   ]
 }
 
