@@ -1,7 +1,4 @@
-import React, { useState } from "react";
-
 const ProjetCreation = () => {
-  const [description, setDescription] = useState("");
   return (
     <div>
       <input type="checkbox" id="projet-modal" className="modal-toggle" />
