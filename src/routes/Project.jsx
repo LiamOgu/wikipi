@@ -16,8 +16,8 @@ const Project = () => {
       <header >
         <Navbar />
       </header>
-      <main className="p-6 mt-30">
-        <DocumentPage project={project} documentation={documentation} />
+      <main className="p-6 mt-30 mx-5 border-1 border-dashed border-gray-200 rounded">
+        
         <div className="flex flex-col mb-4 md:flex-row md:gap-10">
           <h1 className="text-3xl font-bold">{project ? project.title : "Projet inconnu"}</h1>
           <h2 className="text-3xl font-bold">{documentation ? documentation.title : "Documentation inconnue"}</h2>
