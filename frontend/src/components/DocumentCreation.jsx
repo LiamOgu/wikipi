@@ -20,10 +20,10 @@ const DocumentCreation = () => {
                 className="select select-neutral validator"
                 required
               >
-                <option selected value="" className="text-text-terciary">Source du projet</option>
-                <option>Projet Labo 1</option>
-                <option>Projet Labo 2</option>
-                <option>Projet Labo 3</option>
+                <option value="Source du projet" className="text-text-terciary">Source du projet</option>
+                <option value="Projet Labo 1">Projet Labo 1</option>
+                <option value="Projet Labo 2">Projet Labo 2</option>
+                <option value="Projet Labo 3">Projet Labo 3</option>
               </select>
               <p className="text-xs text-gray-500">
                 Depuis quel projet créer la documentation ?

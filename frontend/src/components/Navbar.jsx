@@ -24,6 +24,7 @@ const Navbar = () => {
             <li><a>Menu</a></li>
             <li><a>Settings</a></li>
             <li><NavLink to="/login"><a>Log out</a></NavLink></li>
+            <li><NavLink to="/login">Log out</NavLink></li>
           </ul>
         </div>
       </div>
