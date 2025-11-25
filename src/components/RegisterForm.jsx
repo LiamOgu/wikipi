@@ -17,7 +17,7 @@ const RegisterForm = () => {
 
   const onSubmit = async (data) => {
     try {
-      const response = await axios.post("https://api.example.com/register", data);
+      const response = await axios.post("https://localhost:3000/register", data);
       console.log("Success:", response.data);
     } catch (error) {
       console.error("Registration error:", error);
