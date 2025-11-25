@@ -23,21 +23,21 @@ const RegisterForm = () => {
         <fieldset className="fieldset w-[300px] p-6 space-y-2">
           <legend className="fieldset-legend text-3xl font-bold">Inscription</legend>
           <div>
-            <label className="label text-[16px] font-medium text-gray-800">Nom d'utilisateur</label>
+            <label htmlFor="username" className="label text-[16px] font-medium text-gray-800">Nom d'utilisateur</label>
             <label className="input validator">
-              <input type="username" required placeholder="Nom d'utilisateur" />
+              <input type="text" required placeholder="Nom d'utilisateur" name="username" />
             </label>
           </div>
           <div>
-            <label className="label text-[16px] font-medium text-gray-800">Email</label>
+            <label htmlFor="email" className="label text-[16px] font-medium text-gray-800">Email</label>
             <label className="input validator">
-              <input type="email" required placeholder="Email" />
+              <input type="email" required placeholder="Email" name="email" />
             </label>
             <p className="label text-gray-500 text-[14px]">Adresse email du campus</p>
             <p className="validator-hint hidden">Veuillez rentrer une adresse email valide.</p>
           </div>
           <div>
-            <label className="label text-[16px] font-medium text-gray-800">Mot de passe</label>
+            <label htmlFor="password" className="label text-[16px] font-medium text-gray-800">Mot de passe</label>
             <label className="input validator">
               <input type="password" required placeholder="Mot de passe" minlength="8" name="password" />
               <button type="button" className="hidden hover:scale-110 transition duration-150">
@@ -50,7 +50,7 @@ const RegisterForm = () => {
             <p className="validator-hint hidden">Votre mot de passe doit faire au moins 8 caractères</p>
           </div>
           <div>
-            <label className="label text-[16px] font-medium text-gray-800">Confirmation du mot de passe</label>
+            <label htmlFor="confirmPassword" className="label text-[16px] font-medium text-gray-800">Confirmation du mot de passe</label>
             <label className="input validator">
               <input type="password" required placeholder="Confirmation du mot de passe" minlength="8" name="confirmPassword" />
               <button type="button" className="hidden hover:scale-110 transition duration-150">

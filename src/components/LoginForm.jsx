@@ -14,17 +14,17 @@ const LoginForm = () => {
           <fieldset className="fieldset w-[300px] p-6 gap-10">
             <legend className="fieldset-legend text-3xl font-bold">Connexion</legend>
             <div>
-              <label className="label text-[16px] font-medium text-gray-800">Email</label>
+              <label htmlFor="email" className="label text-[16px] font-medium text-gray-800">Email</label>
               <label className="input validator">
-                <input type="email" required placeholder="Email" />
+                <input type="email" required placeholder="Email" name="email" />
               </label>
               <p className="label text-gray-500 text-[14px]">Adresse email du campus</p>
               <p className="validator-hint hidden">Veuillez rentrer une adresse email valide.</p>
             </div>
             <div>
-              <label className="label text-[16px] font-medium text-gray-800">Mot de passe</label>
+              <label htmlFor="password" className="label text-[16px] font-medium text-gray-800">Mot de passe</label>
               <label className="input validator">
-                <input type="password" required placeholder="Mot de passe" minlength="8" />
+                <input type="password" required placeholder="Mot de passe" minlength="8" name="password" />
                 <button type="button" className="hidden hover:scale-110 transition duration-150">
                   <MdOutlineRemoveRedEye />
                 </button>
