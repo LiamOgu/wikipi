@@ -1,24 +1,27 @@
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { FaRegEyeSlash } from "react-icons/fa";
 import logo from "../assets/Logo_wikiPi.png";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 
 const RegisterForm = () => {
   const {
-    register,
-    handleSubmit,
-    formState: { errors, isSubmitting },
+    register, handleSubmit, formState: { errors, isSubmitting },
     watch
   } = useForm();
 
   const password = watch("password"); // pour comparer les mdp
 
+  const navigate = useNavigate()
+
   const onSubmit = async (data) => {
     try {
-      const response = await axios.post("https://localhost:3000/register", data);
+      const response = await axios.post("http://localhost:3000/auth/register", data);
       console.log("Success:", response.data);
+      if (response.status === 201) {
+        navigate('/login')
+      }
     } catch (error) {
       console.error("Registration error:", error);
     }
@@ -45,7 +48,7 @@ const RegisterForm = () => {
               <input
                 type="text"
                 placeholder="Nom d'utilisateur"
-                {...register("username", { required: "Nom obligatoire" })}
+                {...register("name", { required: "Nom obligatoire" })}
               />
             </label>
 
