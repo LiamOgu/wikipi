@@ -1,4 +1,4 @@
-import ActualityCard from "./ActualityCard"
+import ActualityCard from "./ActualityCard.jsx"
 import data from '../data/documentationsData.js'
 
 const ActualitySection = () => {
