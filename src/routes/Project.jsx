@@ -18,8 +18,11 @@ const Project = () => {
       </header>
       <main className="p-6 mt-30">
         <DocumentPage project={project} documentation={documentation} />
-        <h1>{project ? project.title : "Projet inconnu"}</h1>
-        <h2>{documentation ? documentation.title : "Documentation inconnue"}</h2>
+        <div className="flex flex-col mb-4 md:flex-row md:gap-10">
+          <h1 className="text-3xl font-bold">{project ? project.title : "Projet inconnu"}</h1>
+          <h2 className="text-3xl font-bold">{documentation ? documentation.title : "Documentation inconnue"}</h2>
+        </div>
+        
         <p>{documentation ? documentation.content : "Contenu indisponible"}</p>
       </main>
     </Sidebar >
