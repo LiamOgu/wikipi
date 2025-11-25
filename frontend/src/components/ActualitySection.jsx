@@ -13,7 +13,7 @@ const ActualitySection = () => {
       <div className="w-full flex justify-center">
         <div className="w-9/10 flex flex-between">
           <div className="w-full grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-            {doc.map(id => (<ActualityCard id={id} />))}
+            {doc.map(id => (<ActualityCard key={id} id={id} />))}
           </div>
         </div>
       </div>

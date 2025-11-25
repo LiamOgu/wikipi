@@ -39,7 +39,7 @@ const Home = () => {
 
   useEffect(() => {
     fetchUser()
-  }, [])
+  },)
 
   return (
     <Sidebar>

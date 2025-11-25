@@ -24,6 +24,9 @@ const RegisterForm = () => {
       }
     } catch (error) {
       console.error("Registration error:", error);
+      if (error.response?.data?.message) {
+        alert(error.response.data.message);
+      }
     }
   };
 
@@ -52,8 +55,8 @@ const RegisterForm = () => {
               />
             </label>
 
-            {errors.username && (
-              <p className="text-red-500 text-sm">{errors.username.message}</p>
+            {errors.name && (
+              <p className="text-red-500 text-sm">{errors.name.message}</p>
             )}
           </div>
 
