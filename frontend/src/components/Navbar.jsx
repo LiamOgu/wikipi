@@ -12,8 +12,10 @@ const Navbar = () => {
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" />
           </svg>
         </label>
-        <div> {/* Logo */}
-          <img src={logoWikipi} className="h-12" alt="Wikipi Logo"></img>
+        <div>
+          <NavLink to="/">
+            <img src={logoWikipi} className="h-12" alt="Wikipi Logo"></img>
+          </NavLink>
         </div>
       </div>
       <div className="flex items-center"> {/* Right side of the navbar (user avatar with dropdown menu) */}
