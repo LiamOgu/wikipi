@@ -5,9 +5,11 @@ import panda from "../assets/login_panda.png"
 import { NavLink, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import axios from "axios"
+import { useState } from 'react'
 
 
 const LoginForm = () => {
+  const [passwordHidden, setPasswordHidden] = useState(true)
   const { register, handleSubmit, formState: { errors, isSubmitting },
   } = useForm();
 
@@ -63,12 +65,9 @@ const LoginForm = () => {
                       message: "Minimum 8 caractères",
                     },
                   })}
-                  type="password" placeholder="Mot de passe" name="password" />
-                <button type="button" className="hidden hover:scale-110 transition duration-150">
-                  <MdOutlineRemoveRedEye />
-                </button>
-                <button type="button" className="hover:scale-110 transition duration-150">
-                  <FaRegEyeSlash />
+                  type={passwordHidden ? "password" : "text"} placeholder="Mot de passe" name="password" />
+                <button onClick={() => setPasswordHidden(!passwordHidden)} type="button" className="hover:scale-110 transition duration-150">
+                  {passwordHidden ? <FaRegEyeSlash /> : <MdOutlineRemoveRedEye />}
                 </button>
               </label>
               {errors.password && (
@@ -100,7 +99,7 @@ const LoginForm = () => {
       <div className="flex items-center">
         <img src={panda} className="w-90 lg:inline hidden" alt="image of a panda saying 'Hey welcome back'"></img>
       </div>
-    </div>
+    </div >
   )
 }
 

@@ -4,8 +4,13 @@ import logo from "../assets/Logo_wikiPi.png";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import axios from "axios";
+import { useState } from 'react'
 
 const RegisterForm = () => {
+  const [passwordHidden, setPasswordHidden] = useState(true);
+  const [confirmationPasswordHidden, setConfirmationPasswordHidden] = useState(true);
+
+
   const {
     register, handleSubmit, formState: { errors, isSubmitting },
     watch
@@ -95,7 +100,7 @@ const RegisterForm = () => {
 
             <label className="input validator">
               <input
-                type="password"
+                type={passwordHidden ? "password" : "text"}
                 placeholder="Mot de passe"
                 {...register("password", {
                   required: "Mot de passe obligatoire",
@@ -105,6 +110,9 @@ const RegisterForm = () => {
                   },
                 })}
               />
+              <button onClick={() => setPasswordHidden(!passwordHidden)} type="button" className="hover:scale-110 transition duration-150">
+                {passwordHidden ? <FaRegEyeSlash /> : <MdOutlineRemoveRedEye />}
+              </button>
             </label>
 
             {errors.password && (
@@ -120,7 +128,7 @@ const RegisterForm = () => {
 
             <label className="input validator">
               <input
-                type="password"
+                type={confirmationPasswordHidden ? "password" : "text"}
                 placeholder="Confirmation du mot de passe"
                 {...register("confirmPassword", {
                   required: "Confirmation obligatoire",
@@ -128,6 +136,9 @@ const RegisterForm = () => {
                     value === password || "Les mots de passe ne correspondent pas",
                 })}
               />
+              <button onClick={() => setConfirmationPasswordHidden(!confirmationPasswordHidden)} type="button" className="hover:scale-110 transition duration-150">
+                {confirmationPasswordHidden ? <FaRegEyeSlash /> : <MdOutlineRemoveRedEye />}
+              </button>
             </label>
 
             {errors.confirmPassword && (
