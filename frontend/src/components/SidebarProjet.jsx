@@ -35,7 +35,7 @@ const SidebarProjet = ({ id }) => {
 
           {docs.map(doc => (
             <li key={doc.id}>
-              <a>{doc.title}</a>
+              <NavLink to={`/Project?title=${projet ? projet.title : "Projet inconnu"}&doc=${doc.title}`}>{doc.title}</NavLink>
             </li>
           ))}
         </ul>
