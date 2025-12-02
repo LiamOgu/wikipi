@@ -2,8 +2,10 @@ import projetsData from "../data/projetsData.js";
 import documentationData from "../data/documentationsData.js";
 import { MdAdd } from "react-icons/md";
 import { FaRegFolderClosed } from "react-icons/fa6";
+import { NavLink, useNavigate } from 'react-router-dom';
 
 const SidebarProjet = ({ id }) => {
+  const navigate = useNavigate();
   const projet = projetsData.projet.find(p => p.id === id);
 
   if (!projet) {
@@ -14,6 +16,10 @@ const SidebarProjet = ({ id }) => {
     .map(docRef => documentationData.documentation.find(d => d.id === docRef.id))
     .filter(Boolean);
 
+  const handleNewDoc = () => {
+    navigate(`?nouvelleDoc=${id}`);
+  };
+
   return (
     <li>
       <details>
@@ -22,7 +28,7 @@ const SidebarProjet = ({ id }) => {
         </summary>
         <ul>
           <li>
-            <label htmlFor="doc-modal" className="btn">
+            <label htmlFor="doc-modal" className="btn" onClick={handleNewDoc}>
               <MdAdd /> Nouvelle Documentation
             </label>
           </li>
