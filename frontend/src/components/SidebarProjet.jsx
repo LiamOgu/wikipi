@@ -2,10 +2,10 @@ import projetsData from "../data/projetsData.js";
 import documentationData from "../data/documentationsData.js";
 import { MdAdd } from "react-icons/md";
 import { FaRegFolderClosed } from "react-icons/fa6";
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink, useSearchParams } from 'react-router-dom';
 
 const SidebarProjet = ({ id }) => {
-  const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
   const projet = projetsData.projet.find(p => p.id === id);
 
   if (!projet) {
@@ -17,7 +17,9 @@ const SidebarProjet = ({ id }) => {
     .filter(Boolean);
 
   const handleNewDoc = () => {
-    navigate(`?nouvelleDoc=${id}`);
+    const newParams = new URLSearchParams(searchParams);
+    newParams.set('nouvelleDoc', id);
+    setSearchParams(newParams);
   };
 
   return (

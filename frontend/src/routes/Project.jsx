@@ -5,6 +5,8 @@ import projetData from '../data/projetsData.js'
 import Navbar from "../components/Navbar"
 import Sidebar from "../components/Sidebar"
 import { useEffect } from "react"
+import DocumentCreation from '../components/DocumentCreation'
+import ProjetCreation from '../components/ProjetCreation'
 
 const Project = () => {
   useEffect(() => {
@@ -32,6 +34,8 @@ const Project = () => {
         </div>
 
         <p>{documentation ? documentation.content : "Contenu indisponible"}</p>
+        <DocumentCreation />
+        <ProjetCreation />
       </main>
     </Sidebar >
 

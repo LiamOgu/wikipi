@@ -28,7 +28,9 @@ const DocumentCreation = () => {
   }, [projetId, projets]);
 
   const handleCloseModal = () => {
-    setSearchParams({});
+    const newParams = new URLSearchParams(searchParams);
+    newParams.delete('nouvelleDoc');
+    setSearchParams(newParams);
     if (modalCheckboxRef.current) {
       modalCheckboxRef.current.checked = false;
     }
