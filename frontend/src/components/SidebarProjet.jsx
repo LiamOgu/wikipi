@@ -2,7 +2,6 @@ import documentationData from "../data/documentationsData.js";
 import { MdAdd } from "react-icons/md";
 import { FaRegFolderClosed } from "react-icons/fa6";
 import { NavLink, useSearchParams } from 'react-router-dom';
-import SearchBar from "./SearchBar.jsx";
 
 const SidebarProjet = ({ projet }) => {  // Reçoit l'objet projet directement
   const [searchParams, setSearchParams] = useSearchParams();
