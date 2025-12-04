@@ -1,33 +1,20 @@
-import { useState } from "react"
-import axios from 'axios'
+import { useState } from "react";
 import { useForm } from "react-hook-form";
-
-
+import { api } from '../api.js';
 const ProjetCreation = () => {
   const [description, setDescription] = useState("");
-  const { register, handleSubmit, formState: { errors, isSubmitting },
-  } = useForm();
-
+  const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm();
 
   const onSubmit = async (data) => {
-    console.log(localStorage.getItem("token"));
-    try {
-      const token = localStorage.getItem("token");
+    console.log("Token:", localStorage.getItem("token"));
 
-      if (!token) {
-        console.error("No token found");
-        return;
-      }
+    try {
       const projectData = {
         title: data.title.trim(),
         description: data.description.trim() || null
       };
-      const response = await axios.post('http://localhost:3000/api/projects', projectData, {
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-      });
+
+      const response = await api.post('/api/projects', projectData);
       console.log("Projet créé:", response.data);
 
       if (response.status === 201) {
@@ -36,7 +23,12 @@ const ProjetCreation = () => {
       }
 
     } catch (error) {
-      console.error("Registration error:", error);
+      console.error("Erreur création projet:", error);
+      if (error.response?.data?.message) {
+        alert(`Erreur: ${error.response.data.message}`);
+      } else {
+        alert("Erreur lors de la création du projet");
+      }
     }
   };
 
@@ -95,7 +87,7 @@ const ProjetCreation = () => {
         </div>
         <label className="modal-backdrop" htmlFor="projet-modal">Close</label>
       </div>
-    </div >
+    </div>
   );
 };
 

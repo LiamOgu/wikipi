@@ -51,7 +51,7 @@ export const createProject = async (req, res) => {
 export const getProjects = async (req, res) => {
   try {
     const [projects] = await pool.query(
-      `SELECT id, title, desctiption, created_by, created_at 
+      `SELECT id, title, description, created_by, created_at 
       FROM projects ORDER BY created_at DESC`
     );
 

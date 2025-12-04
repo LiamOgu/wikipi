@@ -1,19 +1,43 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react';
 import { MdAdd } from 'react-icons/md';
 import Loupe from "./Loupe.jsx";
-import data from '../data/projetsData.js'
 import SidebarProjet from "./SidebarProjet.jsx";
+import { api } from '../api.js';
 
 const Sidebar = ({ children }) => {
-  const [filteredProjects, setFilteredProjects] = useState(data.projet); // <- ICI
+  const [projects, setProjects] = useState([]);
+  const [filteredProjects, setFilteredProjects] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  const loadProjects = async () => {
+    setLoading(true);
+    setError(null);
+
+    try {
+      const response = await api.get('/api/projects');
+      const projectsData = response.data.projects || [];
+      setProjects(projectsData);
+      setFilteredProjects(projectsData);
+    } catch (err) {
+      console.error('Erreur chargement projets:', err);
+      setError('Impossible de charger les projets');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    loadProjects();
+  }, []);
 
   const handleFilter = (event) => {
     const searchTerm = event.target.value.toLowerCase();
 
     if (!searchTerm.trim()) {
-      setFilteredProjects(data.projet);
+      setFilteredProjects(projects);
     } else {
-      const filtered = data.projet.filter(projet =>
+      const filtered = projects.filter(projet =>
         projet.title.toLowerCase().includes(searchTerm)
       );
       setFilteredProjects(filtered);
@@ -58,8 +82,19 @@ const Sidebar = ({ children }) => {
                 </label>
               </li>
 
-              {/* Vérifie si des projets existent */}
-              {filteredProjects.length === 0 ? (
+              {loading && (
+                <li className="text-gray-500 italic text-center py-4">
+                  Chargement des projets...
+                </li>
+              )}
+
+              {error && (
+                <li className="text-red-500 italic text-center py-4">
+                  {error}
+                </li>
+              )}
+
+              {!loading && !error && filteredProjects.length === 0 ? (
                 <li className="text-gray-500 italic text-center py-4">
                   Aucun projet trouvé
                 </li>

@@ -1,23 +1,37 @@
 import { useState, useEffect, useRef } from "react";
-import projetsData from '../data/projetsData.js'
 import { useSearchParams } from 'react-router-dom';
+import { api } from '../api.js';
 
 const DocumentCreation = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const projetId = searchParams.get('nouvelleDoc');
-  const projets = projetsData.projet;
 
   const modalCheckboxRef = useRef(null);
-
   const [selectedProject, setSelectedProject] = useState("Source du projet");
-
   const [description, setDescription] = useState("");
+  const [projects, setProjects] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const loadProjects = async () => {
+      setLoading(true);
+      try {
+        const response = await api.get('/api/projects');
+        setProjects(response.data.projects || []);
+      } catch (err) {
+        console.error('Erreur chargement projets:', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    loadProjects();
+  }, []);
 
   useEffect(() => {
     if (projetId && modalCheckboxRef.current) {
       modalCheckboxRef.current.checked = true;
 
-      const projetTrouve = projets.find(p => p.id.toString() === projetId);
+      const projetTrouve = projects.find(p => p.id.toString() === projetId);
 
       if (projetTrouve) {
         setSelectedProject(projetTrouve.title);
@@ -25,7 +39,7 @@ const DocumentCreation = () => {
     } else if (modalCheckboxRef.current) {
       modalCheckboxRef.current.checked = false;
     }
-  }, [projetId, projets]);
+  }, [projetId, projects]);
 
   const handleCloseModal = () => {
     const newParams = new URLSearchParams(searchParams);
@@ -35,6 +49,31 @@ const DocumentCreation = () => {
       modalCheckboxRef.current.checked = false;
     }
     setDescription("");
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(e.target);
+    const documentationData = {
+      title: formData.get('title'),
+      excerpt: formData.get('excerpt'),
+      description: description,
+      project_id: projetId
+    };
+
+    try {
+      const response = await api.post(`/api/projects/${projetId}/documentations`, documentationData);
+      console.log("Documentation créée:", response.data);
+
+      if (response.status === 201) {
+        handleCloseModal();
+        window.location.reload();
+      }
+    } catch (error) {
+      console.error("Erreur création documentation:", error);
+      alert("Erreur lors de la création de la documentation");
+    }
   };
 
   return (
@@ -52,7 +91,7 @@ const DocumentCreation = () => {
             Créer une documentation
           </h2>
 
-          <form method="" className="flex flex-col gap-4">
+          <form onSubmit={handleSubmit} className="flex flex-col gap-4">
             <div className="flex flex-col gap-2">
               <label className="text-sm font-medium text-gray-800">
                 Source du projet
@@ -62,12 +101,17 @@ const DocumentCreation = () => {
                 onChange={(e) => setSelectedProject(e.target.value)}
                 className="select select-neutral validator"
                 required
+                disabled={loading}
               >
-                {projets.map((projet) => (
-                  <option key={projet.id} value={projet.title}>
-                    {projet.title}
-                  </option>
-                ))}
+                {loading ? (
+                  <option>Chargement...</option>
+                ) : (
+                  projects.map((projet) => (
+                    <option key={projet.id} value={projet.title}>
+                      {projet.title}
+                    </option>
+                  ))
+                )}
               </select>
               <p className="text-xs text-gray-500">
                 Depuis quel projet créer la documentation ?
@@ -79,24 +123,27 @@ const DocumentCreation = () => {
                 Intitulé de la documentation <span className="text-red-700">*</span>
               </label>
               <input
+                name="title"
                 type="text"
                 required
                 placeholder="Intitulé de la documentation"
                 className="border border-gray-300 rounded-md px-3 py-2 text-sm"
               />
             </div>
+
             <div className="flex flex-col gap-2">
               <label className="text-sm font-medium text-gray-800">
                 Extrait de la documentation
               </label>
               <textarea
+                name="excerpt"
                 required
                 placeholder="Courte description"
                 maxLength={50}
                 className="border border-gray-300 rounded-md px-3 py-2 text-sm resize-none"
               />
               <p className="text-xs text-gray-500">
-                Résumer court de la documentation. (50 caracètres)
+                Résumer court de la documentation. (50 caractères)
               </p>
             </div>
 
@@ -105,6 +152,7 @@ const DocumentCreation = () => {
                 Description
               </label>
               <textarea
+                name="description"
                 required
                 placeholder="Description complète de la documentation"
                 maxLength={350}
@@ -116,6 +164,7 @@ const DocumentCreation = () => {
                 {description.length}/350 caractères
               </p>
             </div>
+
             <div className="flex gap-2">
               <button
                 type="submit"
