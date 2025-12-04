@@ -24,11 +24,8 @@ export const register = async (req, res) => {
       [name, email, hashedPassword]
     );
 
-    // Répond au client
     res.status(201).json({
       message: "Utilisateur créé avec succès",
-      token,
-      user: { id: result.insertId, name, email },
     });
   } catch (error) {
     console.error("Erreur inscription:", error);
@@ -48,7 +45,7 @@ export const login = async (req, res) => {
     if (existingUsers.length === 0) {
       return res.status(404).json({ message: "L'utilisateur n'existe pas" });
     }
-    const isMatch = await bcrypt.compare(password, rows[0].password);
+    const isMatch = await bcrypt.compare(password, existingUsers[0].password);
     if (!isMatch) {
       return res.status(401).json({ message: "Mauvais mot de passe" });
     }

@@ -10,7 +10,6 @@ const RegisterForm = () => {
   const [passwordHidden, setPasswordHidden] = useState(true);
   const [confirmationPasswordHidden, setConfirmationPasswordHidden] = useState(true);
 
-
   const {
     register, handleSubmit, formState: { errors, isSubmitting },
     watch
