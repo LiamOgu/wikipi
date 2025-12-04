@@ -63,9 +63,6 @@ const DocumentCreation = () => {
                 className="select select-neutral validator"
                 required
               >
-                <option value="Source du projet" className="text-text-terciary">
-                  Source du projet
-                </option>
                 {projets.map((projet) => (
                   <option key={projet.id} value={projet.title}>
                     {projet.title}
@@ -75,12 +72,11 @@ const DocumentCreation = () => {
               <p className="text-xs text-gray-500">
                 Depuis quel projet créer la documentation ?
               </p>
-              <p className="validator-hint">Required</p>
             </div>
 
             <div className="flex flex-col gap-2">
               <label className="text-sm font-medium text-gray-800">
-                Intitulé de la documentation *
+                Intitulé de la documentation <span className="text-red-700">*</span>
               </label>
               <input
                 type="text"
@@ -89,6 +85,20 @@ const DocumentCreation = () => {
                 className="border border-gray-300 rounded-md px-3 py-2 text-sm"
               />
             </div>
+            <div className="flex flex-col gap-2">
+              <label className="text-sm font-medium text-gray-800">
+                Extrait de la documentation
+              </label>
+              <textarea
+                required
+                placeholder="Courte description"
+                maxLength={50}
+                className="border border-gray-300 rounded-md px-3 py-2 text-sm resize-none"
+              />
+              <p className="text-xs text-gray-500">
+                Résumer court de la documentation. (50 caracètres)
+              </p>
+            </div>
 
             <div className="flex flex-col gap-2">
               <label className="text-sm font-medium text-gray-800">
@@ -96,11 +106,11 @@ const DocumentCreation = () => {
               </label>
               <textarea
                 required
-                placeholder="Description"
+                placeholder="Description complète de la documentation"
                 maxLength={350}
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
-                className="border border-gray-300 rounded-md px-3 py-2 text-sm h-24 resize-none"
+                className="border border-gray-300 rounded-md px-3 py-2 text-sm h-24"
               />
               <p className="text-xs text-gray-500 text-right">
                 {description.length}/350 caractères
