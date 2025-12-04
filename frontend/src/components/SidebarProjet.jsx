@@ -3,7 +3,7 @@ import { MdAdd } from "react-icons/md";
 import { FaRegFolderClosed } from "react-icons/fa6";
 import { NavLink, useSearchParams } from 'react-router-dom';
 
-const SidebarProjet = ({ projet }) => {  // Reçoit l'objet projet directement
+const SidebarProjet = ({ projet }) => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const docs = projet.documentations
