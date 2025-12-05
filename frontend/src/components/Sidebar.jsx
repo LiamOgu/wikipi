@@ -1,64 +1,52 @@
-import { useState, useEffect } from 'react';
-import { MdAdd } from 'react-icons/md';
-import Loupe from "./Loupe.jsx";
-import SidebarProjet from "./SidebarProjet.jsx";
-import { api } from '../api.js';
+import { useState, useEffect } from 'react'
+import { MdAdd } from 'react-icons/md'
+import Loupe from "./Loupe"
+import SidebarProjet from "./SidebarProjet"
+import { useProjectsContext } from '../hooks/useProjectsContext'
 
 const Sidebar = ({ children }) => {
-  const [projects, setProjects] = useState([]);
-  const [filteredProjects, setFilteredProjects] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [filteredProjects, setFilteredProjects] = useState([])
 
-  const loadProjects = async () => {
-    setLoading(true);
-    setError(null);
-
-    try {
-      const response = await api.get('/api/projects');
-      const projectsData = response.data.projects || [];
-      setProjects(projectsData);
-      setFilteredProjects(projectsData);
-    } catch (err) {
-      console.error('Erreur chargement projets:', err);
-      setError('Impossible de charger les projets');
-    } finally {
-      setLoading(false);
-    }
-  };
+  const { projects, loading, error, loadProjects } = useProjectsContext()
 
   useEffect(() => {
-    loadProjects();
-  }, []);
+    if (projects.length === 0) {
+      loadProjects()
+    }
+  }, [loadProjects, projects.length])
 
   const handleFilter = (event) => {
-    const searchTerm = event.target.value.toLowerCase();
+    const searchTerm = event.target.value.toLowerCase()
 
     if (!searchTerm.trim()) {
-      setFilteredProjects(projects);
+      setFilteredProjects(projects)
     } else {
       const filtered = projects.filter(project =>
         project.title.toLowerCase().includes(searchTerm)
-      );
-      setFilteredProjects(filtered);
+      )
+      setFilteredProjects(filtered)
     }
-  };
+  }
+
+  useEffect(() => {
+    setFilteredProjects(projects)
+  }, [projects])
 
   return (
     <div>
       <div className="drawer z-40 lg:drawer-open">
         <input id="my-drawer" type="checkbox" className="drawer-toggle" />
-        <div className="drawer-content">
-          {children}
-        </div>
+        <div className="drawer-content">{children}</div>
+
         <div className="drawer-side mt-20">
           <label
             htmlFor="my-drawer"
             aria-label="close sidebar"
             className="drawer-overlay"
           ></label>
+
           <ul className="menu bg-base-200 min-h-full w-80 p-4">
-            {/* La search bar */}
+            {/* Search bar */}
             <label className="flex justify-between w-9/10 rounded-box border border-gray-300">
               <div className="flex items-center gap-2 mx-2">
                 <Loupe strokeColor="black" />
@@ -96,7 +84,7 @@ const Sidebar = ({ children }) => {
 
               {!loading && !error && filteredProjects.length === 0 ? (
                 <li className="text-gray-500 italic text-center py-4">
-                  Aucun project trouvé
+                  Aucun projet trouvé
                 </li>
               ) : (
                 filteredProjects.map(project => (
@@ -111,7 +99,7 @@ const Sidebar = ({ children }) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Sidebar;
+export default Sidebar

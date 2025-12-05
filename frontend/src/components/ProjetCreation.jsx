@@ -1,34 +1,31 @@
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { api } from '../api.js';
+import { useState } from "react"
+import { useForm } from "react-hook-form"
+import { useProjectsContext } from '../hooks/useProjectsContext'
+
 const ProjetCreation = () => {
-  const [description, setDescription] = useState("");
-  const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm();
+  const [description, setDescription] = useState("")
+  const { register, handleSubmit, formState: { errors, isSubmitting }, reset } = useForm()
+
+  const { createProject } = useProjectsContext()
 
   const onSubmit = async (data) => {
     try {
       const projectData = {
         title: data.title.trim(),
         description: data.description.trim() || null
-      };
-
-      const response = await api.post('/api/projects', projectData);
-      console.log("Projet créé:", response.data);
-
-      if (response.status === 201) {
-        console.log("Projet créé avec succès");
-        window.location.reload();
       }
+      await createProject(projectData)
+
+      const modal = document.getElementById('projet-modal')
+      if (modal) modal.checked = false
+
+      reset()
+      setDescription("")
 
     } catch (error) {
-      console.error("Erreur création projet:", error);
-      if (error.response?.data?.message) {
-        alert(`Erreur: ${error.response.data.message}`);
-      } else {
-        alert("Erreur lors de la création du projet");
-      }
+      console.error("Erreur création projet:", error)
     }
-  };
+  }
 
   return (
     <div>
@@ -38,6 +35,7 @@ const ProjetCreation = () => {
           <h2 className="text-3xl font-bold text-center mb-6">
             Créer un projet
           </h2>
+
           <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-8">
             <div className="flex flex-col gap-2">
               <label className="text-sm font-medium text-gray-800">
@@ -46,7 +44,6 @@ const ProjetCreation = () => {
               <input
                 {...register("title", { required: "Intitulé du projet obligatoire" })}
                 type="text"
-                required
                 placeholder="Intitulé du projet"
                 className="border border-gray-300 rounded-md px-3 py-2 text-sm"
               />
@@ -54,26 +51,24 @@ const ProjetCreation = () => {
                 <p className="text-red-500 text-sm">{errors.title.message}</p>
               )}
             </div>
+
             <div className="flex flex-col gap-2">
               <label className="text-sm font-medium text-gray-800">
                 Description
               </label>
               <textarea
                 {...register("description")}
-                required
                 placeholder="Description"
                 maxLength={350}
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 className="border border-gray-300 rounded-md px-3 py-2 text-sm h-24 resize-none"
               />
-              {errors.description && (
-                <p className="text-red-500 text-sm">{errors.description.message}</p>
-              )}
               <p className="text-xs text-gray-500 text-right">
                 {description.length}/350 caractères
               </p>
             </div>
+
             <button
               type="submit"
               disabled={isSubmitting}
@@ -81,12 +76,11 @@ const ProjetCreation = () => {
               {isSubmitting ? "Création..." : "Créer le projet"}
             </button>
           </form>
-          <label className="modal-backdrop" htmlFor="projet-modal">Close</label>
         </div>
         <label className="modal-backdrop" htmlFor="projet-modal">Close</label>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default ProjetCreation;
+export default ProjetCreation
