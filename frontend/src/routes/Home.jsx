@@ -4,42 +4,18 @@ import MainWelcomeCard from "../components/MainWelcomeCard"
 import ActualitySection from "../components/ActualitySection"
 import DocumentCreation from "../components/DocumentCreation"
 import ProjetCreation from "../components/ProjetCreation"
-import { useEffect } from 'react'
-import axios from 'axios'
-import { useNavigate } from 'react-router-dom'
+import { useAuthProtection } from "../hooks/useAuth"
 
 const Home = () => {
-  const navigate = useNavigate()
+  const { loading } = useAuthProtection()
 
-  const fetchUser = async () => {
-    let response;
-
-    try {
-      const token = localStorage.getItem('token')
-
-      response = await axios.get('http://localhost:3000/auth/home', {
-        headers: {
-          "Authorization": `Bearer ${token}`
-        }
-      })
-
-      if (response.status !== 201) {
-        navigate("/login")
-        return
-      }
-
-    } catch (err) {
-      navigate("/login")
-      console.log(err)
-      return
-    }
-
-    console.log(response.data)
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <div className="loading loading-spinner loading-lg"></div>
+      </div>
+    )
   }
-
-  useEffect(() => {
-    fetchUser()
-  },)
 
   return (
     <Sidebar>
