@@ -2,26 +2,25 @@ import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { FaRegEyeSlash } from "react-icons/fa";
 import logo from "../assets/Logo_wikiPi.png"
 import panda from "../assets/login_panda.png"
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import axios from "axios"
 import { useState } from 'react'
+import { useAuth } from "../hooks/useAuth";
 
 
 const LoginForm = () => {
+  const { login } = useAuth()
   const [passwordHidden, setPasswordHidden] = useState(true)
   const { register, handleSubmit, formState: { errors, isSubmitting },
   } = useForm();
-
-  const navigate = useNavigate()
 
   const onSubmit = async (data) => {
     try {
       const response = await axios.post("http://localhost:3000/auth/login", data);
       console.log("Success:", response.data);
       if (response.status === 201) {
-        localStorage.setItem('token', response.data.token)
-        navigate('/')
+        login(response.data.token)
       }
     } catch (error) {
       console.error("Registration error:", error);

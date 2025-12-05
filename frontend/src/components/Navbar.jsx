@@ -1,9 +1,10 @@
 import logoWikipi from '../assets/Logo_wikiPi.png'
 import user from '../assets/default-user-icon.webp'
 import { NavLink } from "react-router-dom"
-
+import { useAuth } from '../hooks/useAuth'
 
 const Navbar = () => {
+  const { user: authUser, logout } = useAuth()
   return (
     <div className="navbar fixed top-0 left-0 w-full z-50 bg-base-100 px-6 py-4 flex justify-between border-b-1 border-gray-200">
       <div className="flex items-center gap-1"> {/* Left side of the navbar (logo and menu icon) */}
@@ -22,10 +23,12 @@ const Navbar = () => {
         <div className="avatar dropdown dropdown-end">
           <div tabIndex={0} role="button" className="w-[42px] rounded-full m-1"><img src={user} alt="User Avatar" /></div> {/* User avatar */}
           <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 mt-12 shadow-lg"> {/* Dropdown menu */}
-            <li className="menu-title border-b-1 border-gray-200">User</li>
+            <li className="menu-title border-b-1 border-gray-200">
+              {authUser?.name || 'User'}
+            </li>
             <li><a>Menu</a></li>
             <li><a>Settings</a></li>
-            <li><NavLink to="/login">Log out</NavLink></li>
+            <li ><button onClick={logout}>Log out</button></li>
           </ul>
         </div>
       </div>

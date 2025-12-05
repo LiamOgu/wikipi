@@ -4,7 +4,7 @@ import MainWelcomeCard from "../components/MainWelcomeCard"
 import ActualitySection from "../components/ActualitySection"
 import DocumentCreation from "../components/DocumentCreation"
 import ProjetCreation from "../components/ProjetCreation"
-import { useAuthProtection } from "../hooks/useAuth"
+import { useAuthProtection } from "../hooks/useAuthProtection"
 
 const Home = () => {
   const { loading } = useAuthProtection()
