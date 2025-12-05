@@ -1,4 +1,3 @@
-// src/hooks/useProjects.js
 import { useState, useCallback } from "react";
 import { api } from "../api";
 
@@ -59,38 +58,25 @@ export const useProjects = () => {
     try {
       const response = await api.post("/api/projects", projectData);
 
-      // RÉGLAGE 1 : Vérifier la structure de la réponse
-      console.log("Réponse API dans hook:", response.data);
-
-      // Essayer différentes structures possibles
       let newProject;
 
-      // Si la réponse a un champ "project"
       if (response.data.project) {
         newProject = response.data.project;
-      }
-      // Si la réponse est directement le projet
-      else if (response.data.id || response.data._id) {
+      } else if (response.data.id || response.data._id) {
         newProject = response.data;
-      }
-      // Sinon, utiliser les données envoyées + l'ID de la réponse
-      else {
+      } else {
         newProject = {
           ...projectData,
-          id: response.data.id || Date.now(), // fallback temporaire
+          id: response.data.id || Date.now(),
         };
       }
 
-      // RÉGLAGE 2 : S'assurer que le projet a un "id"
       if (!newProject.id && newProject._id) {
-        // Si MongoDB utilise _id, on le mappe vers id
         newProject = { ...newProject, id: newProject._id };
       }
 
-      // RÉGLAGE 3 : Log pour déboguer
       console.log("Projet à ajouter:", newProject);
 
-      // Ajouter le nouveau projet à la liste
       setProjects((prev) => [...prev, newProject]);
       return newProject;
     } catch (err) {
