@@ -6,8 +6,6 @@ const ProjetCreation = () => {
   const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm();
 
   const onSubmit = async (data) => {
-    console.log("Token:", localStorage.getItem("token"));
-
     try {
       const projectData = {
         title: data.title.trim(),

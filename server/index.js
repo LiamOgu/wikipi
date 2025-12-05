@@ -9,7 +9,7 @@ app.use(cors());
 app.use(express.json());
 app.use("/auth", authRouter);
 app.use("/api/projects", projectRouter);
-app.use("/api", documentationRoutes);
+app.use("/api/documentations", documentationRoutes);
 
 app.listen(process.env.PORT, () => {
   console.log("Server is running");

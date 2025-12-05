@@ -37,8 +37,8 @@ const Sidebar = ({ children }) => {
     if (!searchTerm.trim()) {
       setFilteredProjects(projects);
     } else {
-      const filtered = projects.filter(projet =>
-        projet.title.toLowerCase().includes(searchTerm)
+      const filtered = projects.filter(project =>
+        project.title.toLowerCase().includes(searchTerm)
       );
       setFilteredProjects(filtered);
     }
@@ -77,7 +77,7 @@ const Sidebar = ({ children }) => {
 
             <ul className="menu bg-base-200 rounded-box w-9/10">
               <li>
-                <label htmlFor="projet-modal" className="btn flex justify-start w-full mb-4">
+                <label htmlFor="project-modal" className="btn flex justify-start w-full mb-4">
                   <MdAdd /> Nouveau Projet
                 </label>
               </li>
@@ -96,13 +96,13 @@ const Sidebar = ({ children }) => {
 
               {!loading && !error && filteredProjects.length === 0 ? (
                 <li className="text-gray-500 italic text-center py-4">
-                  Aucun projet trouvé
+                  Aucun project trouvé
                 </li>
               ) : (
-                filteredProjects.map(projet => (
+                filteredProjects.map(project => (
                   <SidebarProjet
-                    key={projet.id}
-                    projet={projet}
+                    key={project.id}
+                    project={project}
                   />
                 ))
               )}

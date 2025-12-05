@@ -47,8 +47,10 @@ const Home = () => {
         <Navbar />
       </header>
       <main>
-        <MainWelcomeCard />
-        <ActualitySection />
+        <div className="border m-6 mt-26 rounded-xl border-dashed border-gray-300 bg-white">
+          <MainWelcomeCard />
+          <ActualitySection />
+        </div>
         <DocumentCreation />
         <ProjetCreation />
       </main>

@@ -66,4 +66,35 @@ export const getProjects = async (req, res) => {
   }
 };
 
-export const getProject = async (req, res) => {};
+export const getProjectById = async (req, res) => {
+  const { id } = req.params;
+  const userId = req.userId;
+
+  try {
+    const [project] = await pool.query(
+      `SELECT p.*, u.name as creator_name
+       FROM projects p
+       JOIN users u ON p.created_by = u.id
+       WHERE p.id = ? AND (p.created_by = ? OR p.is_public = 1)`,
+      [id, userId]
+    );
+
+    if (project.length === 0) {
+      return res.status(404).json({
+        success: false,
+        message: "Projet non trouvé ou accès refusé",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      project: project[0],
+    });
+  } catch (error) {
+    console.error("Erreur récupération projet:", error);
+    res.status(500).json({
+      success: false,
+      message: "Erreur lors de la récupération du projet",
+    });
+  }
+};

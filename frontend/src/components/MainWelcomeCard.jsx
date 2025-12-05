@@ -1,7 +1,7 @@
 const MainWelcomeCard = () => {
     return (
-        <div className="w-full flex justify-center mt-30">
-            <div className="hero bg-red-secondary rounded-md w-9/10 h-[230px]">
+        <div className="w-full flex justify-center mt-6">
+            <div className="hero bg-red-secondary rounded-md w-95/100 h-[230px]">
                 <div className="hero-content flex-col justify-between lg:flex-row w-10/10">
                     <div className="text-start">
                         <p className="text-white">La base documentaire pour le Labo</p>

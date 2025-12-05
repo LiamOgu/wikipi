@@ -4,17 +4,17 @@ import { FaRegFolderClosed } from "react-icons/fa6";
 import { NavLink, useSearchParams } from 'react-router-dom';
 import { api } from '../api.js';
 
-const SidebarProjet = ({ projet }) => {
+const SidebarProjet = ({ project }) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [documentations, setDocumentations] = useState([]);
   const [error, setError] = useState(null);
 
-  // Charger les documentations quand le projet est ouvert
+  // Charger les documentations quand le project est ouvert
   const loadDocumentations = async () => {
     setError(null);
 
     try {
-      const response = await api.get(`/api/projects/${projet.id}/documentations`);
+      const response = await api.get(`/api/documentations/projects/${project.id}/documentations`);
       setDocumentations(response.data.documentations || []);
     } catch (err) {
       console.error('Erreur chargement documentations:', err);
@@ -22,7 +22,7 @@ const SidebarProjet = ({ projet }) => {
     }
   };
 
-  // Charger quand le projet s'ouvre
+  // Charger quand le project s'ouvre
   const handleOpen = async () => {
     if (documentations.length === 0) {
       await loadDocumentations();
@@ -31,7 +31,7 @@ const SidebarProjet = ({ projet }) => {
 
   const handleNewDoc = () => {
     const newParams = new URLSearchParams(searchParams);
-    newParams.set('nouvelleDoc', projet.id);
+    newParams.set('nouvelleDoc', project.id);
     setSearchParams(newParams);
   };
 
@@ -39,7 +39,7 @@ const SidebarProjet = ({ projet }) => {
     <li>
       <details onToggle={(e) => e.target.open && handleOpen()}>
         <summary>
-          <FaRegFolderClosed /> {projet.title}
+          <FaRegFolderClosed /> {project.title}
         </summary>
         <ul>
           <li>
@@ -52,7 +52,7 @@ const SidebarProjet = ({ projet }) => {
 
           {documentations.map(doc => (
             <li key={doc.id}>
-              <NavLink to={`/Project?title=${projet.title}&doc=${doc.title}`}>
+              <NavLink to={`/project/${project.id}/documentation/${doc.id}`}>
                 {doc.title}
               </NavLink>
             </li>

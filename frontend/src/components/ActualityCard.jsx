@@ -1,32 +1,65 @@
-import user from '../assets/default-user-icon.webp'
-import docData from '../data/documentationsData.js'
-import projetData from '../data/projetsData.js'
-import { NavLink } from 'react-router-dom'
+import user from '../assets/default-user-icon.webp';
+import { NavLink } from 'react-router-dom';
 
-const ActualityCard = ({ id }) => {
-    const documentation = docData.documentation.find(doc => doc.id === id)
-    if (!documentation) {
-        return <div>Documentation introuvable (id: {id})</div>
-    }
-    const projet = projetData.projet.find(proj => proj.documentations.some(doc => doc.id === id));
+const ActualityCard = ({ documentation }) => {
+    // Tronquer le texte pour l'affichage
+    const truncateText = (text, maxLength = 100) => {
+        if (!text) return '';
+        if (text.length <= maxLength) return text;
+        return text.substring(0, maxLength) + '...';
+    };
+
+    const {
+        id,
+        title,
+        excerpt,
+        content,
+        project_title,
+        author_name,
+        author_avatar,
+        project_id
+    } = documentation;
+
     return (
-        <div className="card w-full bg-white card-sm shadow-sm hover:shadow-lg hover:scale-105 transition-all duration-200 hover:cursor-pointer">
-            <NavLink to={`/Project?title=${projet ? projet.title : "Projet inconnu"}&doc=${documentation.title}`}>
-                <div className="card-body text-black">
-                    <h3>{projet ? projet.title : "Projet inconnu"}</h3>
-                    <h2 className="card-title">{documentation.title}</h2>
-                    <p>{documentation.content}</p>
-                    <div className='flex flex-row gap-4'>
-                        <img src={user} className='rounded-full w-[50px]'></img>
+        <div className="card bg-base-100 shadow-sm hover:shadow-lg hover:scale-[1.02] transition-all duration-200 hover:cursor-pointer border border-gray-100">
+            <NavLink to={`/project/${project_id}/documentation/${id}`}>
+                <div className="card-body">
+                    <div className="flex items-center justify-between mb-2">
+                        <span className="font-semibold text-sm">
+                            {project_title}
+                        </span>
+
+                    </div>
+
+                    <h2 className="card-title text-lg font-bold line-clamp-2">
+                        {title}
+                    </h2>
+
+                    <p className="text-gray-600 text-sm line-clamp-3">
+                        {excerpt || truncateText(content, 150)}
+                    </p>
+
+                    <div className="flex items-center gap-3 mt-4 pt-4">
+                        <div className="avatar">
+                            <div className="w-10 h-10 rounded-full">
+                                <img
+                                    src={author_avatar || user}
+                                    alt={author_name}
+                                    className="rounded-full"
+                                />
+                            </div>
+                        </div>
                         <div>
-                            <p>{documentation.author}</p>
-                            <p>{documentation.date}</p>
+                            <p className="font-medium text-sm">{author_name}</p>
+                            <p className="text-xs text-gray-500">
+                                {new Date(documentation.created_at).toLocaleDateString('fr-FR')}
+                            </p>
                         </div>
                     </div>
                 </div>
-            </NavLink >
+            </NavLink>
         </div>
-    )
-}
+    );
+};
 
-export default ActualityCard
+export default ActualityCard;
