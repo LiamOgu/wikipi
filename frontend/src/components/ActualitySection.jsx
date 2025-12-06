@@ -1,0 +1,106 @@
+import ActualityCard from "./ActualityCard.jsx";
+import { api } from '../api.js';
+import { useState, useEffect } from "react";
+
+const ActualitySection = () => {
+  const [documentations, setDocumentations] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  const loadDocumentations = async () => {
+    setLoading(true);
+    setError(null);
+
+    try {
+      const response = await api.get('/api/documentations');
+      setDocumentations(response.data.documentations || []);
+    } catch (err) {
+      console.error('Erreur chargement documentations:', err);
+      setError('Impossible de charger les documentations');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    loadDocumentations();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="w-full flex flex-col items-center my-10">
+        <div className="w-95/100">
+          <h1 className="text-4xl font-bold mb-6 text-text-primary">
+            Actualités
+          </h1>
+          <div className="flex justify-center">
+            <span className="loading loading-spinner loading-lg"></span>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="w-full flex flex-col items-center my-10">
+        <div className="w-95/100">
+          <h1 className="text-4xl font-bold mb-6 text-text-primary">
+            Actualités
+          </h1>
+          <div className="alert alert-error">
+            <span>{error}</span>
+            <button
+              onClick={loadDocumentations}
+              className="btn btn-sm btn-ghost"
+            >
+              Réessayer
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (documentations.length === 0) {
+    return (
+      <div className="w-full flex flex-col items-center my-10">
+        <div className="w-95/100">
+          <h1 className="text-4xl font-bold mb-6 text-text-primary">
+            Actualités
+          </h1>
+          <div className="text-center py-10">
+            <p className="text-gray-500">Aucune documentation disponible</p>
+            <p className="text-sm text-gray-400 mt-2">
+              Créez votre première documentation dans un projet
+            </p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="w-full flex flex-col items-center my-10">
+      <div className="w-95/100">
+        <h1 className="text-4xl font-bold mb-6 text-text-primary">
+          Actualités
+        </h1>
+      </div>
+      <div className="w-full flex justify-center">
+        <div className="w-95/100">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {documentations.map(doc => (
+              <ActualityCard
+                key={doc.id}
+                documentation={doc}
+              />
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default ActualitySection;
