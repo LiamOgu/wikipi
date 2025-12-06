@@ -1,4 +1,4 @@
-const Loupe = (props) => {
+const SearchIcon = (props) => {
   return (
     <div>
       <svg
@@ -20,5 +20,5 @@ const Loupe = (props) => {
   )
 }
 
-export default Loupe
+export default SearchIcon
 

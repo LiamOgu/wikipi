@@ -1,80 +1,113 @@
-import { useParams } from "react-router-dom";
-import { api } from '../api.js';
-import { useState, useEffect } from "react";
-import Navbar from "../components/Navbar";
-import Sidebar from "../components/Sidebar";
-import DocumentPage from "../components/DocumentPage.jsx";
-import DocumentCreation from "../components/DocumentCreation";
-import ProjetCreation from "../components/ProjetCreation";
+// src/routes/Project.jsx
+import { useParams } from "react-router-dom"
+import { useState, useEffect } from "react"
+import AppLayout from "../components/Layout/AppLayout"
+import DocumentPage from "../components/Documents/DocumentPage"
+import DocumentCreationModal from "../components/Documents/DocumentCreationModal"
+import ProjectCreationModal from "../components/Projects/ProjectCreationModal"
+import { useProjectsContext } from "../hooks/useProjectsContext"
+import { useDocumentationsContext } from "../hooks/useDocumentationsContext"
 
 const Project = () => {
-  const { projectId, docId } = useParams();
-  const [project, setProject] = useState(null);
-  const [documentation, setDocumentation] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const { projectId, docId } = useParams()
+
+  const {
+    projects,
+    loading: projectsLoading,
+    error: projectsError,
+    loadProject
+  } = useProjectsContext()
+
+  const {
+    currentDocumentation,
+    loading: docsLoading,
+    error: docsError,
+    loadDocumentation
+  } = useDocumentationsContext()
+
+  const [project, setProject] = useState(null)
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
 
   useEffect(() => {
-    window.scrollTo(0, 0);
+    window.scrollTo(0, 0)
 
     const fetchData = async () => {
       try {
-        const projectResponse = await api.get(`/api/projects/${projectId}`);
-        setProject(projectResponse.data.project);
+        setLoading(true)
+
+        let currentProject = projects.find(p => p.id.toString() === projectId)
+
+        if (!currentProject && projectId) {
+          currentProject = await loadProject(projectId)
+        }
+
+        setProject(currentProject)
 
         if (docId) {
-          const docResponse = await api.get(`/api/documentations/${docId}`);
-          setDocumentation(docResponse.data.documentation);
+          await loadDocumentation(docId)
         }
+
       } catch (err) {
-        console.error("Erreur chargement données:", err);
-        setError("Erreur lors du chargement des données");
+        console.error("Erreur chargement données:", err)
+        setError(err.message || "Erreur lors du chargement des données")
       } finally {
-        setLoading(false);
+        setLoading(false)
       }
-    };
+    }
 
-    if (projectId) fetchData();
-  }, [projectId, docId]);
+    if (projectId) {
+      fetchData()
+    }
+  }, [projectId, docId, projects, loadProject, loadDocumentation])
 
-  if (loading) {
+  const isLoading = loading || projectsLoading || docsLoading
+  const hasError = error || projectsError || docsError
+
+  if (isLoading) {
     return (
-      <Sidebar>
-        <Navbar />
+      <AppLayout>
         <main className="p-6 mt-30 mx-5 flex justify-center items-center h-64">
           <span className="loading loading-spinner loading-lg"></span>
           <span className="ml-4">Chargement...</span>
         </main>
-      </Sidebar>
-    );
+      </AppLayout>
+    )
   }
 
-  if (error) {
+  if (hasError) {
     return (
-      <Sidebar>
-        <Navbar />
+      <AppLayout>
         <main className="p-6 mt-30 mx-5">
-          <div className="alert alert-error">{error}</div>
+          <div className="alert alert-error">
+            {error || projectsError || docsError}
+          </div>
         </main>
-      </Sidebar>
-    );
+      </AppLayout>
+    )
+  }
+
+  if (!project) {
+    return (
+      <AppLayout>
+        <main className="p-6 mt-30 mx-5">
+          <div className="alert alert-warning">
+            Projet non trouvé
+          </div>
+        </main>
+      </AppLayout>
+    )
   }
 
   return (
-    <Sidebar>
-      <header>
-        <Navbar />
-      </header>
+    <AppLayout>
       <main>
-        <div>
-          <DocumentPage project={project} documentation={documentation} />
-        </div>
-        <DocumentCreation />
-        <ProjetCreation />
+        <DocumentPage project={project} documentation={currentDocumentation} />
+        <DocumentCreationModal />
+        <ProjectCreationModal />
       </main>
-    </Sidebar>
+    </AppLayout>
+  )
+}
 
-  );
-};
-
-export default Project;
+export default Project

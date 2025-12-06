@@ -1,9 +1,9 @@
-import Navbar from "../components/Navbar"
-import Sidebar from "../components/Sidebar"
-import MainWelcomeCard from "../components/MainWelcomeCard"
-import ActualitySection from "../components/ActualitySection"
-import DocumentCreation from "../components/DocumentCreation"
-import ProjetCreation from "../components/ProjetCreation"
+// src/routes/Home.jsx
+import AppLayout from "../components/Layout/AppLayout"
+import WelcomeHero from "../components/Layout/WelcomeHero"
+import DocumentListSection from "../components/Documents/DocumentListSection"
+import DocumentCreationModal from "../components/Documents/DocumentCreationModal"
+import ProjectCreationModal from "../components/Projects/ProjectCreationModal"
 import { useAuthProtection } from "../hooks/useAuthProtection"
 
 const Home = () => {
@@ -18,19 +18,16 @@ const Home = () => {
   }
 
   return (
-    <Sidebar>
-      <header >
-        <Navbar />
-      </header>
+    <AppLayout>
       <main>
         <div className="border m-6 mt-26 rounded-xl border-dashed border-gray-300 bg-white">
-          <MainWelcomeCard />
-          <ActualitySection />
+          <WelcomeHero />
+          <DocumentListSection />
         </div>
-        <DocumentCreation />
-        <ProjetCreation />
+        <DocumentCreationModal />
+        <ProjectCreationModal />
       </main>
-    </Sidebar >
+    </AppLayout>
   )
 }
 

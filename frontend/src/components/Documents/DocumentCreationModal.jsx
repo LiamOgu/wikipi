@@ -1,11 +1,10 @@
-// src/components/DocumentCreation.jsx
 import { useState, useEffect, useRef } from "react"
 import { useSearchParams, useNavigate } from 'react-router-dom'
 import { useForm } from "react-hook-form"
-import { useDocumentationsContext } from "../hooks/useDocumentationsContext"
-import { useProjectsContext } from "../hooks/useProjectsContext"
+import { useDocumentationsContext } from "../../hooks/useDocumentationsContext"
+import { useProjectsContext } from "../../hooks/useProjectsContext"
 
-const DocumentCreation = () => {
+const DocumentCreationModal = () => {
   const [searchParams] = useSearchParams()
   const navigate = useNavigate()
   const { register, handleSubmit, formState: { errors, isSubmitting }, reset } = useForm()
@@ -178,4 +177,4 @@ const DocumentCreation = () => {
   )
 }
 
-export default DocumentCreation
+export default DocumentCreationModal

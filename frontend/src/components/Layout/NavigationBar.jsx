@@ -1,7 +1,7 @@
-import logoWikipi from '../assets/Logo_wikiPi.png'
-import user from '../assets/default-user-icon.webp'
+import logoWikipi from '../../assets/Logo_wikiPi.png'
+import user from '../../assets/default-user-icon.webp'
 import { NavLink } from "react-router-dom"
-import { useAuth } from '../hooks/useAuth'
+import { useAuth } from '../../hooks/useAuth'
 
 const Navbar = () => {
   const { user: authUser, logout } = useAuth()

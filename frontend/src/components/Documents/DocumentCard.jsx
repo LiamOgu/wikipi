@@ -1,7 +1,7 @@
-import user from '../assets/default-user-icon.webp';
+import user from '../../assets/default-user-icon.webp';
 import { NavLink } from 'react-router-dom';
 
-const ActualityCard = ({ documentation }) => {
+const DocumentCard = ({ documentation }) => {
     // Tronquer le texte pour l'affichage
     const truncateText = (text, maxLength = 100) => {
         if (!text) return '';
@@ -62,4 +62,4 @@ const ActualityCard = ({ documentation }) => {
     );
 };
 
-export default ActualityCard;
+export default DocumentCard;

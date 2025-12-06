@@ -4,9 +4,9 @@ import Home from './routes/Home'
 import Login from './routes/Login'
 import Register from './routes/Register'
 import Project from './routes/Project'
-import { AuthProvider } from './context/AuthProvider'
-import { ProjectsProvider } from './context/ProjectProvider'
-import { DocumentationsProvider } from './context/DocumentationsProvider'
+import { AuthProvider } from './contexts/AuthProvider'
+import { ProjectsProvider } from './contexts/ProjectProvider'
+import { DocumentationsProvider } from './contexts/DocumentationsProvider'
 
 const App = () => {
   return (

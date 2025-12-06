@@ -1,8 +1,8 @@
 import { useState } from "react"
 import { useForm } from "react-hook-form"
-import { useProjectsContext } from '../hooks/useProjectsContext'
+import { useProjectsContext } from '../../hooks/useProjectsContext'
 
-const ProjetCreation = () => {
+const ProjectCreationModal = () => {
   const [description, setDescription] = useState("")
   const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm()
 
@@ -75,4 +75,4 @@ const ProjetCreation = () => {
   )
 }
 
-export default ProjetCreation
+export default ProjectCreationModal

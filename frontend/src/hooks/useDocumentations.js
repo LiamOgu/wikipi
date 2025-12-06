@@ -5,7 +5,12 @@ export const useDocumentations = () => {
   const [documentations, setDocumentations] = useState([]);
   const [projectDocumentations, setProjectDocumentations] = useState([]);
   const [currentDocumentation, setCurrentDocumentation] = useState(null);
-  const [loading, setLoading] = useState(false);
+
+  const [loadingAll, setLoadingAll] = useState(false);
+  const [loadingProject, setLoadingProject] = useState(false);
+  const [loadingCurrent, setLoadingCurrent] = useState(false);
+  const [loadingAction, setLoadingAction] = useState(false); // Pour create/update/delete
+
   const [error, setError] = useState(null);
 
   const handleError = useCallback((err, defaultMessage) => {
@@ -19,7 +24,7 @@ export const useDocumentations = () => {
   }, []);
 
   const loadDocumentations = useCallback(async () => {
-    setLoading(true);
+    setLoadingAll(true);
     setError(null);
 
     try {
@@ -30,13 +35,13 @@ export const useDocumentations = () => {
     } catch (err) {
       return handleError(err, "Erreur lors du chargement des documentations");
     } finally {
-      setLoading(false);
+      setLoadingAll(false);
     }
   }, [handleError]);
 
   const loadProjectDocumentations = useCallback(
     async (projectId) => {
-      setLoading(true);
+      setLoadingProject(true);
       setError(null);
 
       try {
@@ -52,7 +57,7 @@ export const useDocumentations = () => {
           `Erreur lors du chargement des documentations du projet ${projectId}`
         );
       } finally {
-        setLoading(false);
+        setLoadingProject(false);
       }
     },
     [handleError]
@@ -60,7 +65,7 @@ export const useDocumentations = () => {
 
   const loadDocumentation = useCallback(
     async (docId) => {
-      setLoading(true);
+      setLoadingCurrent(true);
       setError(null);
 
       try {
@@ -74,7 +79,7 @@ export const useDocumentations = () => {
           `Erreur lors du chargement de la documentation ${docId}`
         );
       } finally {
-        setLoading(false);
+        setLoadingCurrent(false);
       }
     },
     [handleError]
@@ -82,23 +87,36 @@ export const useDocumentations = () => {
 
   const createDocumentation = useCallback(
     async (projectId, documentationData) => {
-      setLoading(true);
+      setLoadingAction(true);
       setError(null);
 
       try {
-        await api.post(
+        const response = await api.post(
           `/api/documentations/projects/${projectId}/documentations`,
           documentationData
         );
 
+        const newDoc = response.data.documentation || response.data;
+
+        if (!newDoc) {
+          throw new Error("Documentation créée mais non retournée");
+        }
+
+        const url = new URL(window.location.href);
+        url.searchParams.delete("nouvelleDoc");
+        window.history.replaceState({}, "", url.toString());
+
+        const modal = document.getElementById("doc-modal");
+        if (modal) modal.checked = false;
         window.location.reload();
+        return newDoc;
       } catch (err) {
         return handleError(
           err,
           "Erreur lors de la création de la documentation"
         );
       } finally {
-        setLoading(false);
+        setLoadingAction(false);
       }
     },
     [handleError]
@@ -106,7 +124,7 @@ export const useDocumentations = () => {
 
   const updateDocumentation = useCallback(
     async (docId, docData) => {
-      setLoading(true);
+      setLoadingAction(true);
       setError(null);
 
       try {
@@ -119,7 +137,7 @@ export const useDocumentations = () => {
           `Erreur lors de la modification de la documentation ${docId}`
         );
       } finally {
-        setLoading(false);
+        setLoadingAction(false);
       }
     },
     [handleError]
@@ -127,7 +145,7 @@ export const useDocumentations = () => {
 
   const deleteDocumentation = useCallback(
     async (docId) => {
-      setLoading(true);
+      setLoadingAction(true);
       setError(null);
 
       try {
@@ -140,7 +158,7 @@ export const useDocumentations = () => {
           `Erreur lors de la suppression de la documentation ${docId}`
         );
       } finally {
-        setLoading(false);
+        setLoadingAction(false);
       }
     },
     [handleError]
@@ -154,7 +172,10 @@ export const useDocumentations = () => {
     documentations,
     projectDocumentations,
     currentDocumentation,
-    loading,
+    loadingAll,
+    loadingProject,
+    loadingCurrent,
+    loadingAction,
     error,
 
     loadDocumentations,
