@@ -6,7 +6,7 @@ import { NavLink } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import axios from "axios"
 import { useState } from 'react'
-import { useAuth } from "../hooks/useAuth";
+import { useAuth } from "../../hooks/useAuth";
 
 
 const LoginForm = () => {
