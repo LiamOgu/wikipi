@@ -1,7 +1,7 @@
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { FaRegEyeSlash } from "react-icons/fa";
-import logo from "../assets/Logo_wikiPi.png"
-import panda from "../assets/login_panda.png"
+import logo from "../../assets/Logo_wikiPi.png"
+import panda from "../../assets/login_panda.png"
 import { NavLink } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import axios from "axios"
