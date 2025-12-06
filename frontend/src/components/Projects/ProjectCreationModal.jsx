@@ -21,7 +21,7 @@ const ProjectCreationModal = () => {
 
   return (
     <div>
-      <input type="checkbox" id="projet-modal" className="modal-toggle" />
+      <input type="checkbox" id="project-modal" className="modal-toggle" />
       <div className="modal backdrop-blur-lg transition-all duration-100 ease-in-out" role="dialog">
         <div className="modal-box flex flex-col justify-center items-center bg-white rounded-2xl shadow-lg p-10 w-[420px]">
           <h2 className="text-3xl font-bold text-center mb-6">
@@ -69,7 +69,7 @@ const ProjectCreationModal = () => {
             </button>
           </form>
         </div>
-        <label className="modal-backdrop" htmlFor="projet-modal">Close</label>
+        <label className="modal-backdrop" htmlFor="project-modal">Close</label>
       </div>
     </div>
   )

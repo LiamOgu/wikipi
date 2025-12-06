@@ -1,4 +1,3 @@
-// src/routes/Project.jsx
 import { useParams } from "react-router-dom"
 import { useState, useEffect } from "react"
 import AppLayout from "../components/Layout/AppLayout"
