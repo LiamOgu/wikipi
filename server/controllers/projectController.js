@@ -5,11 +5,6 @@ export const createProject = async (req, res) => {
 
   const userId = req.userId;
 
-  console.log("Tentative création projet par user:", userId, "Données:", {
-    title,
-    description,
-  });
-
   try {
     const projectData = {
       title: title.trim(),

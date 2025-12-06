@@ -6,8 +6,6 @@ import { useProjectsContext } from '../../hooks/useProjectsContext'
 const ProjectSidebar = ({ children }) => {
   const [searchTerm, setSearchTerm] = useState('')
   const { projects, loading, error, loadProjects } = useProjectsContext()
-  console.log("Les projets générés par useProjects :", projects);
-
 
   useEffect(() => {
     if (projects.length === 0) {
