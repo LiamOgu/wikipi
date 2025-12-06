@@ -6,9 +6,9 @@ export const validateDocumentation = (req, res, next) => {
     });
   }
 
-  if (content && content.length > 350) {
+  if (content && content.length > 10000) {
     return res.status(400).json({
-      message: "Content trop long (max 350 caractères)",
+      message: "Content trop long (max 10000 caractères)",
     });
   }
   if (excerpt && excerpt.length > 50) {

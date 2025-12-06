@@ -1,12 +1,13 @@
 @import "tailwindcss";
 @plugin "daisyui";
+@plugin "@tailwindcss/typography";
 
-@theme{
-  --color-red-primary: #DC2626;
-  --color-red-secondary: #B91C1C;
-  --color-red-terciary: #991B1B;
-  --color-text-primary: #1F2937;
-  --color-text-secondary: #6B7280;
-  --color-text-terciary: #9CA4AF;
-  --color-text-link: #3B82F6;
+@theme {
+  --color-red-primary: #dc2626;
+  --color-red-secondary: #b91c1c;
+  --color-red-terciary: #991b1b;
+  --color-text-primary: #1f2937;
+  --color-text-secondary: #6b7280;
+  --color-text-terciary: #9ca4af;
+  --color-text-link: #3b82f6;
 }
