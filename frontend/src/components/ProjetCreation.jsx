@@ -4,26 +4,18 @@ import { useProjectsContext } from '../hooks/useProjectsContext'
 
 const ProjetCreation = () => {
   const [description, setDescription] = useState("")
-  const { register, handleSubmit, formState: { errors, isSubmitting }, reset } = useForm()
+  const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm()
 
   const { createProject } = useProjectsContext()
 
   const onSubmit = async (data) => {
     try {
-      const projectData = {
-        title: data.title.trim(),
-        description: data.description.trim() || null
-      }
-      await createProject(projectData)
-
-      const modal = document.getElementById('projet-modal')
-      if (modal) modal.checked = false
-
-      reset()
-      setDescription("")
-
+      await createProject({
+        title: data.title,
+        description: data.description
+      })
     } catch (error) {
-      console.error("Erreur création projet:", error)
+      console.error(error)
     }
   }
 

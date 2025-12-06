@@ -1,30 +1,13 @@
 import ActualityCard from "./ActualityCard.jsx";
-import { api } from '../api.js';
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
+import { useDocumentationsContext } from "../hooks/useDocumentationsContext.js";
 
 const ActualitySection = () => {
-  const [documentations, setDocumentations] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  const loadDocumentations = async () => {
-    setLoading(true);
-    setError(null);
-
-    try {
-      const response = await api.get('/api/documentations');
-      setDocumentations(response.data.documentations || []);
-    } catch (err) {
-      console.error('Erreur chargement documentations:', err);
-      setError('Impossible de charger les documentations');
-    } finally {
-      setLoading(false);
-    }
-  };
+  const { documentations, loading, error, loadDocumentations } = useDocumentationsContext()
 
   useEffect(() => {
     loadDocumentations();
-  }, []);
+  }, [loadDocumentations]);
 
   if (loading) {
     return (

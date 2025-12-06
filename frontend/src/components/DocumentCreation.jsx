@@ -1,90 +1,50 @@
-import { useState, useEffect, useRef } from "react";
-import { useSearchParams, useNavigate } from 'react-router-dom';
-import { api } from '../api.js';
-import { useForm } from "react-hook-form";
+// src/components/DocumentCreation.jsx
+import { useState, useEffect, useRef } from "react"
+import { useSearchParams, useNavigate } from 'react-router-dom'
+import { useForm } from "react-hook-form"
+import { useDocumentationsContext } from "../hooks/useDocumentationsContext"
+import { useProjectsContext } from "../hooks/useProjectsContext"
 
 const DocumentCreation = () => {
-  const [searchParams] = useSearchParams();
-  const navigate = useNavigate();
-  const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm();
+  const [searchParams] = useSearchParams()
+  const navigate = useNavigate()
+  const { register, handleSubmit, formState: { errors, isSubmitting }, reset } = useForm()
+  const [content, setContent] = useState("")
+  const [selectedProjectId, setSelectedProjectId] = useState("")
+  const modalCheckboxRef = useRef(null)
 
-  const modalCheckboxRef = useRef(null);
-  const [selectedProjectId, setSelectedProjectId] = useState("");
-  const [content, setContent] = useState("");
-  const [projects, setProjects] = useState([]);
-  const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    const loadProjects = async () => {
-      setLoading(true);
-      try {
-        const response = await api.get('/api/projects');
-        setProjects(response.data.projects || []);
-      } catch (err) {
-        console.error('Erreur chargement projets:', err);
-      } finally {
-        setLoading(false);
-      }
-    };
-    loadProjects();
-  }, []);
+  const { createDocumentation } = useDocumentationsContext()
+  const { projects, loading: projectsLoading } = useProjectsContext()
 
   useEffect(() => {
-    const projetId = searchParams.get('nouvelleDoc');
+    const projetId = searchParams.get('nouvelleDoc')
     if (projetId && modalCheckboxRef.current) {
-      modalCheckboxRef.current.checked = true;
-      const projetExiste = projects.find(p => p.id.toString() === projetId);
-      if (projetExiste) {
-        setSelectedProjectId(projetId);
-      }
+      modalCheckboxRef.current.checked = true
+      setSelectedProjectId(projetId)
     }
-  }, [searchParams, projects]);
+  }, [searchParams])
 
   const handleCloseModal = () => {
-    navigate({ search: '' });
+    navigate({ search: '' })
     if (modalCheckboxRef.current) {
-      modalCheckboxRef.current.checked = false;
+      modalCheckboxRef.current.checked = false
     }
-    setContent("");
-    setSelectedProjectId("");
-  };
+    reset()
+    setContent("")
+    setSelectedProjectId("")
+  }
 
   const onSubmit = async (data) => {
-    // Valider qu'un projet est sélectionné
-    if (!selectedProjectId) {
-      alert("Veuillez sélectionner un projet");
-      return;
-    }
-
     try {
-      const documentData = {
-        title: data.title.trim(),
-        excerpt: data.excerpt.trim() || null,
-        content: data.content.trim() || null,
-      };
-
-      const response = await api.post(
-        `/api/documentations/projects/${selectedProjectId}/documentations`,
-        documentData
-      );
-
-      if (response.status === 201) {
-        console.log("Documentation créée avec succès");
-        handleCloseModal();
-        window.location.reload();
-      }
-
+      await createDocumentation(selectedProjectId, {
+        title: data.title,
+        excerpt: data.excerpt,
+        content: data.content
+      })
     } catch (error) {
-      console.error("Erreur création documentation:", error);
-      if (error.response?.data?.message) {
-        alert(`Erreur: ${error.response.data.message}`);
-      } else if (error.response?.data?.error) {
-        alert(`Erreur: ${error.response.data.error}`);
-      } else {
-        alert("Erreur lors de la création de la documentation");
-      }
+      console.error(error)
     }
-  };
+  }
 
   return (
     <div>
@@ -107,17 +67,14 @@ const DocumentCreation = () => {
                 Projet parent <span className="text-red-700">*</span>
               </label>
               <select
-                {...register("projectId", {
-                  required: "Sélectionnez un projet",
-                  validate: value => value !== "" || "Sélectionnez un projet"
-                })}
                 value={selectedProjectId}
                 onChange={(e) => setSelectedProjectId(e.target.value)}
-                className="select select-neutral validator"
-                disabled={loading}
+                className="select select-neutral"
+                disabled={projectsLoading}
+                required
               >
                 <option value="">Choisir un projet...</option>
-                {loading ? (
+                {projectsLoading ? (
                   <option disabled>Chargement des projets...</option>
                 ) : (
                   projects.map((projet) => (
@@ -127,9 +84,6 @@ const DocumentCreation = () => {
                   ))
                 )}
               </select>
-              {errors.projectId && (
-                <p className="text-red-500 text-sm">{errors.projectId.message}</p>
-              )}
               <p className="text-xs text-gray-500">
                 Sélectionnez le projet auquel lier cette documentation
               </p>
@@ -204,6 +158,7 @@ const DocumentCreation = () => {
                 </p>
               </div>
             </div>
+
             <div className="flex gap-2">
               <button
                 type="submit"
@@ -215,10 +170,12 @@ const DocumentCreation = () => {
             </div>
           </form>
         </div>
-        <label className="modal-backdrop" htmlFor="doc-modal">Close</label>
+        <button className="modal-backdrop" htmlFor="doc-modal" onClick={handleCloseModal}>
+          Close
+        </button>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default DocumentCreation;
+export default DocumentCreation

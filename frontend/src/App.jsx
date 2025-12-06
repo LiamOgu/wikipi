@@ -5,20 +5,23 @@ import Login from './routes/Login'
 import Register from './routes/Register'
 import Project from './routes/Project'
 import { AuthProvider } from './context/AuthProvider'
-import { ProjectsProvider } from './context/ProjectContext'
+import { ProjectsProvider } from './context/ProjectProvider'
+import { DocumentationsProvider } from './context/DocumentationsProvider'
 
 const App = () => {
   return (
     <BrowserRouter>
       <AuthProvider>
         <ProjectsProvider>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/project" element={<Project />} />
-            <Route path="/project/:projectId/documentation/:docId" element={<Project />} />
-          </Routes>
+          <DocumentationsProvider>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/project" element={<Project />} />
+              <Route path="/project/:projectId/documentation/:docId" element={<Project />} />
+            </Routes>
+          </DocumentationsProvider>
         </ProjectsProvider>
       </AuthProvider>
     </BrowserRouter>

@@ -7,6 +7,16 @@ export const useProjects = () => {
   const [error, setError] = useState(null);
   const [currentProject, setCurrentProject] = useState(null);
 
+  const handleError = useCallback((err, defaultMessage) => {
+    const errorMessage =
+      err.response?.data?.message ||
+      err.response?.data?.error ||
+      defaultMessage;
+    setError(errorMessage);
+    console.error(defaultMessage, err);
+    throw err;
+  }, []);
+
   const loadProjects = useCallback(async () => {
     setLoading(true);
     setError(null);
@@ -17,80 +27,51 @@ export const useProjects = () => {
       setProjects(projectsData);
       return projectsData;
     } catch (err) {
-      const errorMessage =
-        err.response?.data?.message ||
-        err.response?.data?.error ||
-        "Erreur lors du chargement des projets";
-      setError(errorMessage);
-      console.error("Erreur chargement projets:", err);
-      throw err;
+      return handleError(err, "Erreur lors du chargement des projets");
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [handleError]);
 
-  const loadProject = useCallback(async (projectId) => {
-    setLoading(true);
-    setError(null);
+  const loadProject = useCallback(
+    async (projectId) => {
+      setLoading(true);
+      setError(null);
 
-    try {
-      const response = await api.get(`/api/projects/${projectId}`);
-      const projectData = response.data.project;
-      setCurrentProject(projectData);
-      return projectData;
-    } catch (err) {
-      const errorMessage =
-        err.response?.data?.message ||
-        err.response?.data?.error ||
-        `Erreur lors du chargement du projet ${projectId}`;
-      setError(errorMessage);
-      console.error("Erreur chargement projet:", err);
-      throw err;
-    } finally {
-      setLoading(false);
-    }
-  }, []);
-
-  const createProject = useCallback(async (projectData) => {
-    setLoading(true);
-    setError(null);
-
-    try {
-      const response = await api.post("/api/projects", projectData);
-
-      let newProject;
-
-      if (response.data.project) {
-        newProject = response.data.project;
-      } else if (response.data.id || response.data._id) {
-        newProject = response.data;
-      } else {
-        newProject = {
-          ...projectData,
-          id: response.data.id || Date.now(),
-        };
+      try {
+        const response = await api.get(`/api/projects/${projectId}`);
+        const projectData = response.data.project;
+        setCurrentProject(projectData);
+        return projectData;
+      } catch (err) {
+        return handleError(
+          err,
+          `Erreur lors du chargement du projet ${projectId}`
+        );
+      } finally {
+        setLoading(false);
       }
+    },
+    [handleError]
+  );
 
-      if (!newProject.id && newProject._id) {
-        newProject = { ...newProject, id: newProject._id };
+  const createProject = useCallback(
+    async (projectData) => {
+      setLoading(true);
+      setError(null);
+
+      try {
+        await api.post("/api/projects", projectData);
+
+        window.location.reload();
+      } catch (err) {
+        return handleError(err, "Erreur lors de la création du projet");
+      } finally {
+        setLoading(false);
       }
-
-      console.log("Projet à ajouter:", newProject);
-
-      setProjects((prev) => [...prev, newProject]);
-      return newProject;
-    } catch (err) {
-      const errorMessage =
-        err.response?.data?.message ||
-        err.response?.data?.error ||
-        "Erreur lors de la création du projet";
-      setError(errorMessage);
-      console.error("Erreur création projet:", err);
-      throw err;
-    } finally {
-      setLoading(false);
-    }
-  }, []);
+    },
+    [handleError]
+  );
 
   const updateProject = useCallback(
     async (projectId, projectData) => {
@@ -98,34 +79,16 @@ export const useProjects = () => {
       setError(null);
 
       try {
-        const response = await api.put(
-          `/api/projects/${projectId}`,
-          projectData
-        );
-        const updatedProject = response.data.project;
+        await api.put(`/api/projects/${projectId}`, projectData);
 
-        setProjects((prev) =>
-          prev.map((p) => (p.id === projectId ? updatedProject : p))
-        );
-
-        if (currentProject?.id === projectId) {
-          setCurrentProject(updatedProject);
-        }
-
-        return updatedProject;
+        window.location.reload();
       } catch (err) {
-        const errorMessage =
-          err.response?.data?.message ||
-          err.response?.data?.error ||
-          "Erreur lors de la mise à jour du projet";
-        setError(errorMessage);
-        console.error("Erreur mise à jour projet:", err);
-        throw err;
+        return handleError(err, "Erreur lors de la mise à jour du projet");
       } finally {
         setLoading(false);
       }
     },
-    [currentProject]
+    [handleError]
   );
 
   const deleteProject = useCallback(
@@ -136,26 +99,14 @@ export const useProjects = () => {
       try {
         await api.delete(`/api/projects/${projectId}`);
 
-        setProjects((prev) => prev.filter((p) => p.id !== projectId));
-
-        if (currentProject?.id === projectId) {
-          setCurrentProject(null);
-        }
-
-        return true;
+        window.location.reload();
       } catch (err) {
-        const errorMessage =
-          err.response?.data?.message ||
-          err.response?.data?.error ||
-          "Erreur lors de la suppression du projet";
-        setError(errorMessage);
-        console.error("Erreur suppression projet:", err);
-        throw err;
+        return handleError(err, "Erreur lors de la suppression du projet");
       } finally {
         setLoading(false);
       }
     },
-    [currentProject]
+    [handleError]
   );
 
   const getProjectById = useCallback(
