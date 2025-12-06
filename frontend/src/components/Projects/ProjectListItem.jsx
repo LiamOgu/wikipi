@@ -1,4 +1,3 @@
-// src/components/Projects/ProjectListItem.jsx
 import { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import { useDocumentationsContext } from '../../hooks/useDocumentationsContext'

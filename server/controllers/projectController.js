@@ -49,10 +49,15 @@ export const createProject = async (req, res) => {
 };
 
 export const getProjects = async (req, res) => {
+  const userId = req.userId;
+
   try {
     const [projects] = await pool.query(
-      `SELECT id, title, description, created_by, created_at 
-      FROM projects ORDER BY created_at DESC`
+      `SELECT id, title, description, created_by, is_public, created_at 
+      FROM projects
+      WHERE created_by = ? OR is_public = true
+      ORDER BY created_at DESC`,
+      [userId]
     );
 
     res.status(200).json({ projects });
