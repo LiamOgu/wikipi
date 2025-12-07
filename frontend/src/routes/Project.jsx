@@ -13,7 +13,7 @@ import { useNavigate } from "react-router-dom"
 const Project = () => {
   useAuthProtection();
 
-  const { user: authUser } = useAuth();
+  const { user: authUser } = useAuth(); // on renomme juste user en authUser pour plus de clarté et pas de conflit
   const navigate = useNavigate();
   const { projectId, docId } = useParams()
 
