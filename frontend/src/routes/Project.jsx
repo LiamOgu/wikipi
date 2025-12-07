@@ -6,12 +6,18 @@ import DocumentCreationModal from "../components/Documents/DocumentCreationModal
 import ProjectCreationModal from "../components/Projects/ProjectCreationModal"
 import { useProjectsContext } from "../hooks/useProjectsContext"
 import { useDocumentationsContext } from "../hooks/useDocumentationsContext"
+import { useAuthProtection } from "../hooks/useAuthProtection"
+import { useAuth } from "../hooks/useAuth"
+import { useNavigate } from "react-router-dom"
 
 const Project = () => {
+  useAuthProtection();
+
+  const { user: authUser } = useAuth();
+  const navigate = useNavigate();
   const { projectId, docId } = useParams()
 
   const {
-    projects,
     loading: projectsLoading,
     error: projectsError,
     loadProject
@@ -34,31 +40,35 @@ const Project = () => {
     const fetchData = async () => {
       try {
         setLoading(true)
+        setError(null)
 
-        let currentProject = projects.find(p => p.id.toString() === projectId)
-
-        if (!currentProject && projectId) {
-          currentProject = await loadProject(projectId)
+        // Charger le projet
+        if (projectId) {
+          const loadedProject = await loadProject(projectId)
+          setProject(loadedProject)
+          if (!loadedProject) {
+            navigate('/')
+          }
         }
 
-        setProject(currentProject)
-
+        // Charger la documentation si ID fourni
         if (docId) {
           await loadDocumentation(docId)
         }
 
       } catch (err) {
         console.error("Erreur chargement données:", err)
-        setError(err.message || "Erreur lors du chargement des données")
+        setError("Une erreur est survenue lors du chargement des données.")
       } finally {
         setLoading(false)
       }
     }
-
     if (projectId) {
       fetchData()
+    } else {
+      setLoading(false)
     }
-  }, [projectId, docId, projects, loadProject, loadDocumentation])
+  }, [projectId, docId, loadProject, loadDocumentation, navigate, authUser])
 
   const isLoading = loading || projectsLoading || docsLoading
   const hasError = error || projectsError || docsError
