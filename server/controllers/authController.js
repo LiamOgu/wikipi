@@ -20,7 +20,7 @@ export const register = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 10);
 
     const [result] = await pool.query(
-      "INSERT INTO users (name, email, password) VALUES (?, ?, ?)",
+      "INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, 'member')",
       [name, email, hashedPassword]
     );
 
@@ -64,12 +64,21 @@ export const login = async (req, res) => {
 export const getHome = async (req, res) => {
   try {
     const [rows] = await pool.query("SELECT * FROM users WHERE id = ?", [
-      req.userId,
+      req.user.id,
     ]);
     if (rows.length === 0) {
       return res.status(404).json({ message: "user do not exist" });
     }
-    return res.status(201).json({ user: rows[0] });
+    return res.status(200).json({
+      user: {
+        id: rows[0].id,
+        name: rows[0].name,
+        email: rows[0].email,
+        role: rows[0].role,
+        avatar_url: rows[0].avatar_url,
+        created_at: rows[0].created_at,
+      },
+    });
   } catch (err) {
     return res.status(500).json({ message: "server error" });
   }

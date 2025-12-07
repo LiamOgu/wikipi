@@ -1,4 +1,3 @@
-// src/routes/Home.jsx
 import AppLayout from "../components/Layout/AppLayout"
 import WelcomeHero from "../components/Layout/WelcomeHero"
 import DocumentListSection from "../components/Documents/DocumentListSection"

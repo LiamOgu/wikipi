@@ -27,6 +27,9 @@ const Navbar = () => {
             <li className="menu-title border-b-1 border-gray-200">
               {authUser?.user.name || 'User'}
             </li>
+            {authUser?.user.role === 'admin' && (
+              <li><NavLink to="/admin">Tableau de bord Admin</NavLink></li>
+            )}
             <li><a>Menu</a></li>
             <li><NavLink to="/settings"><a>Settings</a></NavLink></li>
             <li ><button onClick={logout}>Log out</button></li>

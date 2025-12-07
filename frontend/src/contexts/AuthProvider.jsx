@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
-import axios from 'axios'
+import { api } from '../api'
 import { AuthContext } from './auth-context'
 
 export const AuthProvider = ({ children }) => {
@@ -18,7 +18,7 @@ export const AuthProvider = ({ children }) => {
     }
 
     try {
-      const response = await axios.get('http://localhost:3000/auth/home', {
+      const response = await api.get('http://localhost:3000/auth/home', {
         headers: { Authorization: `Bearer ${token}` },
       })
 
