@@ -1,21 +1,30 @@
 import jwt from "jsonwebtoken";
+import { pool } from "../lib/db.js";
 
 export const verifyToken = async (req, res, next) => {
+  const token = req.headers.authorization?.split(" ")[1];
+
+  if (!token) {
+    return res.status(401).json({ message: "Token manquant" });
+  }
+
   try {
-    const token = req.headers["authorization"].split(" ")[1];
-    if (!token) {
-      return res.status(403).json({ message: "No token provided" });
-    }
     const decoded = jwt.verify(token, process.env.JWT_KEY);
-    req.userId = decoded.id;
+
+    const [rows] = await pool.query(
+      "SELECT id, name, email, role FROM users WHERE id = ?",
+      [decoded.id]
+    );
+
+    if (rows.length === 0) {
+      return res.status(401).json({ message: "Utilisateur non trouvé" });
+    }
+
+    // stock l'utilisateur complet dans la requête
+    req.user = rows[0];
     next();
   } catch (err) {
-    if (err.name === "JsonWebTokenError") {
-      return res.status(403).json({ message: "Invalid token" });
-    }
-    if (err.name === "TokenExpiredError") {
-      return res.status(403).json({ message: "Token exprired" });
-    }
-    return res.status(500).json({ message: "Authentification error" });
+    console.error("Erreur vérification token:", err);
+    return res.status(401).json({ message: "Token invalide" });
   }
 };
