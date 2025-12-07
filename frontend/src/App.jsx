@@ -4,6 +4,7 @@ import Login from './routes/Login'
 import Register from './routes/Register'
 import Project from './routes/Project'
 import Admin from './routes/Admin';
+import Settings from './routes/Settings'
 import { AuthProvider } from './contexts/AuthProvider'
 import { ProjectsProvider } from './contexts/ProjectProvider'
 import { DocumentationsProvider } from './contexts/DocumentationsProvider'

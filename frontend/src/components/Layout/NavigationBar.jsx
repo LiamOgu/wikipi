@@ -30,8 +30,7 @@ const Navbar = () => {
             {authUser?.user.role === 'admin' && (
               <li><NavLink to="/admin">Tableau de bord Admin</NavLink></li>
             )}
-            <li><a>Menu</a></li>
-            <li><NavLink to="/settings"><a>Settings</a></NavLink></li>
+            <li><NavLink to="/settings">Settings</NavLink></li>
             <li ><button onClick={logout}>Log out</button></li>
           </ul>
         </div>
