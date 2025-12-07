@@ -28,7 +28,7 @@ const Navbar = () => {
               {authUser?.user.name || 'User'}
             </li>
             <li><a>Menu</a></li>
-            <li><a>Settings</a></li>
+            <li><NavLink to="/settings"><a>Settings</a></NavLink></li>
             <li ><button onClick={logout}>Log out</button></li>
           </ul>
         </div>
