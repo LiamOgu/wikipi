@@ -11,7 +11,7 @@ const SettingsPage = () => {
         <h2>Changer de nom :</h2>
         <input
           type="text"
-          value={authUser?.user.name || "User"}
+          placeholder={authUser?.user.name || "User"}
           className="border p-2 rounded-xl border-dashed border-gray-300"
         />
 
