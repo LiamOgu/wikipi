@@ -1,6 +1,7 @@
-const Dashboard = ({ data }) => {
-  console.log(data.stats);
-  console.log(data.users);
+const Dashboard = ({ usersList, stats }) => {
+  console.log("stats : ", stats);
+  console.log("users : ", usersList);
+
 
   return (
     <div>
@@ -10,10 +11,12 @@ const Dashboard = ({ data }) => {
       <div>
         Statistiques:
         <ul>
-          <li>Nombre d'utilisateurs: {data.stats.users}</li>
-          <li>Nombre de projets: {data.stats.projects}</li>
-          <li>Nombre de documents: {data.stats.documents}</li>
+          <li>Nombre d'utilisateurs: {stats.stats.users}</li>
+          <li>Nombre de projets: {stats.stats.projects}</li>
+          <li>Nombre de documents: {stats.stats.documents}</li>
         </ul>
+        <button>Voir les utilisateurs</button>
+        <button>Voir les projets/documents</button>
       </div>
     </div>
   )

@@ -51,10 +51,6 @@ export const getAdminStats = async (req, res) => {
       "SELECT COUNT(*) as count FROM documentations"
     );
 
-    const [recentUsers] = await pool.query(
-      "SELECT id, name, email, role, created_at FROM users ORDER BY created_at DESC LIMIT 5"
-    );
-
     const [roleDistribution] = await pool.query(
       "SELECT role, COUNT(*) as count FROM users GROUP BY role"
     );
@@ -65,7 +61,6 @@ export const getAdminStats = async (req, res) => {
         projects: projectCount[0].count,
         documents: docCount[0].count,
       },
-      recentUsers,
       roleDistribution,
     });
   } catch (error) {

@@ -28,6 +28,7 @@ const Admin = () => {
       const usersRes = await api.get('/api/users');
       setUsers(usersRes.data);
 
+
       try {
         const statsRes = await api.get('/api/users/admin/stats');
         setStats(statsRes.data);
@@ -60,7 +61,7 @@ const Admin = () => {
     <AppLayout>
       <main>
         <div className="border m-6 mt-26 rounded-xl border-dashed border-gray-300 bg-white">
-          <Dashboard data={users, stats} />
+          <Dashboard usersList={users} stats={stats} />
         </div>
         <DocumentCreationModal />
         <ProjectCreationModal />
