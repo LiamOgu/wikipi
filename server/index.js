@@ -12,5 +12,5 @@ app.use("/api/projects", projectRouter);
 app.use("/api/documentations", documentationRoutes);
 
 app.listen(process.env.PORT, () => {
-  console.log("Server is running");
+  console.log(`Server is running on ${process.env.PORT}`);
 });
