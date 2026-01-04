@@ -1,4 +1,5 @@
 import { useState } from "react";
+import axios from "axios";
 import { useAuth } from "../../hooks/useAuth";
 import user from "../../assets/default-user-icon.webp";
 
@@ -10,13 +11,33 @@ const SettingsPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // appel API ici
+    const token = localStorage.getItem("token");
+
+    try {
+      await axios.put(
+        "http://localhost:3000/users/me",
+        {
+          name,
+          password,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      alert("Profil mis à jour !");
+    } catch (err) {
+      console.error("Erreur update:", err);
+      alert("Erreur lors de la mise à jour");
+    }
   };
   
   return (
     <div className="flex flex-col gap-5">
       <h1 className="text-4xl font-bold">Paramètres du compte</h1>
-      <form className="flex flex-col gap-5">
+      <form onSubmit={handleSubmit} className="flex flex-col gap-5">
         <h2>Changer de nom :</h2>
         <input
           type="text"
