@@ -1,9 +1,18 @@
+import { useState } from "react";
 import { useAuth } from "../../hooks/useAuth";
 import user from "../../assets/default-user-icon.webp";
 
 const SettingsPage = () => {
   const { user: authUser } = useAuth();
+  const [name, setName] = useState(authUser?.user.name);
+  const [password, setPassword] = useState("");
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    // appel API ici
+  };
+  
   return (
     <div className="flex flex-col gap-5">
       <h1 className="text-4xl font-bold">Paramètres du compte</h1>
@@ -11,14 +20,15 @@ const SettingsPage = () => {
         <h2>Changer de nom :</h2>
         <input
           type="text"
-          placeholder={authUser?.user.name || "User"}
+          value={name}
+          onChange={(e) => setName(e.target.value)}
           className="border p-2 rounded-xl border-dashed border-gray-300"
         />
 
         <h2>Changer mot de passe :</h2>
         <input
-          type="text"
-          placeholder="Nouveau mot de passe"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
           className="border p-2 rounded-xl border-dashed border-gray-300"
         />
         <h2>Changer l'image de profil:</h2>
