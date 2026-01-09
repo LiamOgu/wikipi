@@ -29,7 +29,7 @@ const SettingsPage = () => {
 
       alert("Profil mis à jour !");
     } catch (err) {
-      console.error("Erreur update:", err);
+      console.error("Erreur complète :", err);
       alert("Erreur lors de la mise à jour");
     }
   };

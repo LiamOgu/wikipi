@@ -1,9 +1,10 @@
 import bcrypt from "bcrypt";
+
 import { pool } from "../lib/db.js";
 
 export const updateUser = async (req, res) => {
     const { name, password } = req.body;
-    const userId = req.user.id;
+    const userId = req.userId;
 
     try {
         const fields = [];
@@ -32,7 +33,7 @@ export const updateUser = async (req, res) => {
         WHERE id = ?
         `;
 
-        await db.query(sql, values);
+        await pool.query(sql, values);
 
         res.json({ message: "Profil mis à jour" });
     } catch (err) {
