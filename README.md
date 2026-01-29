@@ -2,6 +2,9 @@
 
 **WikiPi** est une application web de gestion de documentation collaborative. Elle permet aux utilisateurs de créer des projets et d'y associer des documentations structurées, le tout avec un système d'authentification et de gestion des rôles.
 
+<img width="800" height="349" alt="image" src="https://github.com/user-attachments/assets/67c9d18b-f1bb-4b01-a4be-4976931a7dc2" />
+
+
 ---
 
 ## 🚀 Fonctionnalités
