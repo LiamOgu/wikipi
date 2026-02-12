@@ -7,10 +7,12 @@ import {
 } from "../controllers/documentationController.js";
 import { verifyToken } from "../middleware/auth.js";
 import { validateDocumentation } from "../validators/documentationValidator.js";
+import {RateLimter} from "../middleware/rateLimiter.js"
 
 const router = express.Router();
 
 router.use(verifyToken);
+router.use(RateLimter);
 
 router.post(
   "/projects/:projectId/documentations",
